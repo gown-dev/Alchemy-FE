@@ -1,0 +1,119 @@
+.page {
+  min-height: 100vh;
+  background: url("/assets/webdesign/bg/dotsbg.png") center / auto repeat,
+    #11320c;
+}
+
+/* Content */
+.content {
+  min-height: calc(100vh - 220px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 3rem;
+  padding-bottom: 64px;
+}
+
+/* Parchment */
+.feather-container {
+  position: relative;
+  width: 470px;
+  margin: 0 auto;
+}
+
+.feather-img {
+  width: 100%;
+  display: block;
+}
+
+/* Parchment content */
+.feather-content {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.feather-title {
+  margin: 0 0 6px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: normal;
+  font-style: italic;
+  font-size: 22px;
+  color: #3b2b1e;
+  margin-left: 3rem;
+}
+
+/* Form */
+.field {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  text-align: left;
+  padding-left: 3rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 16px;
+  color: #4a3a2b;
+}
+
+.field input {
+  width: 100%;
+  background: #f5f1e6;
+  border: 1px solid #b09b7a;
+  padding: 6px 8px;
+  font-family: serif;
+  font-size: 13px;
+  color: #3b2b1e;
+  outline: none;
+  border-radius: 4px;
+}
+
+/* Register button */
+.register-btn {
+  position: relative;
+  margin-top: 2rem;
+  border: none;
+  background: none;
+  margin-left: 1rem;
+  width: 100px;
+}
+
+.register-btn img {
+  width: 100%;
+  display: block;
+}
+
+.register-btn span {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 8px;
+  font-family: serif;
+  font-size: 18px;
+  color: #000000;
+  pointer-events: none;
+}
+
+.register-btn:hover img {
+  filter: brightness(1.1);
+}
+
+.register-btn:active img {
+  transform: translateY(1px);
+}

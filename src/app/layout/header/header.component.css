@@ -1,0 +1,46 @@
+/* Header */
+.header img {
+  width: 100%;
+  display: block;
+}
+
+.header-separator {
+  height: 10px;
+  background-image: url("/assets/webdesign/banner/woodbar.png");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-color: #11320c;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+
+  padding: 0;
+  height: 50px;
+
+  background-color: #11320c;
+  background-image: url("/assets/webdesign/banner/hedge1.png");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 100%;
+}
+
+.img-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.img-btn img {
+  height: 38px;
+  display: block;
+}
+
+.img-btn:hover img {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
