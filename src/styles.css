@@ -1,9 +1,75 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #11320c;
+@font-face {
+  font-family: "Alagard";
+  src:
+    local("Alagard"),
+    url("/assets/fonts/alagard.ttf") format("truetype"),
 }
-/* You can add global styles to this file, and also import other style files */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #11320c;
+    font-family: 'Alagard';
+}
+
+div, span, img, p, h2, button, a {
+    user-select: none;
+}
+
+a {
+    cursor: pointer;
+}
+
+img {
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+#app-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-stacked {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    justify-self: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.pixel-font {
+    font-family: 'Alagard';
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+}
+
+.router-container {
+  flex-grow: 1;
+  background: url("/assets/webdesign/bg/dotsbg.png") center / auto repeat,
+    #11320c;
+}

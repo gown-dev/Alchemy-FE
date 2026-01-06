@@ -1,36 +1,43 @@
-<!-- Header -->
-<header class="header">
-  <img src="/assets/webdesign/banner/woodbanner1.png" alt="Forest header" />
-</header>
+<div class="header-grid">
+  <!-- Header -->
+  <img class="header-banner-background" src="/assets/webdesign/banner/woodbanner1.png" alt="Forest header" />
+  <img class="header-banner-fence" src="/assets/webdesign/misc/fence1.png" />
+  <img class="header-banner-sign" src="/assets/webdesign/misc/sign.png" />
+  <img class="header-banner-foliage-left" src="/assets/webdesign/banner/hedge1.png" />
+  <img class="header-banner-foliage-right" src="/assets/webdesign/banner/hedge1.png" />
+  <div class="header-background"></div>
 
-<!-- Woodbar separator -->
-<div class="header-separator"></div>
+  <!-- Woodbar separator -->
+  <div class="header-separator"></div>
 
-<!-- Navigation -->
-<nav class="nav">
-  <button class="img-btn">
-    <img src="/assets/webdesign/button/button1.png" alt="Social" />
-  </button>
+  <!-- Navigation -->
+  <nav class="header-nav">
+    <!-- @if (isAuthenticated) { -->
+      <button class="img-btn btn">
+        <img src="/assets/webdesign/button/button1.png" alt="Social" />
+      </button>
 
-  <button class="img-btn">
-    <img src="/assets/webdesign/button/button1.png" alt="Pet page" />
-  </button>
+      <button class="img-btn btn">
+        <img src="/assets/webdesign/button/button1.png" alt="Pet page" />
+      </button>
 
-  <button class="img-btn">
-    <img src="/assets/webdesign/button/button1.png" alt="Adventure" />
-  </button>
+      <button class="img-btn btn">
+        <img src="/assets/webdesign/button/button1.png" alt="Adventure" />
+      </button>
 
-  <button class="img-btn">
-    <img src="/assets/webdesign/button/button1.png" alt="Games" />
-  </button>
+      <button class="img-btn btn">
+        <img src="/assets/webdesign/button/button1.png" alt="Games" />
+      </button>
 
-  <button class="img-btn">
-    <img src="/assets/webdesign/button/button1.png" alt="Shop" />
-  </button>
+      <button class="img-btn btn">
+        <img src="/assets/webdesign/button/button1.png" alt="Shop" />
+      </button>
 
-  @if (isAdmin) {
-    <button class="img-btn">
-      <img src="/assets/webdesign/button/button1.png" alt="Admin" />
-    </button>
-  }
-</nav>
+      <!-- @if (isAdmin) { -->
+        <button class="img-btn btn">
+          <img src="/assets/webdesign/button/button1.png" alt="Admin" />
+        </button>
+      <!-- } -->
+    <!-- } -->
+  </nav>
+</div>

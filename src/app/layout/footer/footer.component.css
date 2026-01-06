@@ -1,12 +1,12 @@
 .footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100vw;
   display: flex;
   justify-content: center;
+  background-color: #00000030;
   gap: 24px;
   padding: 16px 0;
-
-  background-color: #0e260a;
-  font-family: serif;
-  font-size: 13px;
 }
 
 .footer a {
