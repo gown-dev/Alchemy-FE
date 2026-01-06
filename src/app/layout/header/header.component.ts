@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthProxyService } from '../../services/auth-proxy.service';
 
 @Component({
   selector: 'app-header',
@@ -6,4 +7,14 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {}
+export class HeaderComponent implements OnInit {
+
+  isAdmin: boolean = false;
+
+  constructor(private authService: AuthProxyService) { }
+
+  ngOnInit(): void {
+    this.authService.isAdminUser().subscribe(result => this.isAdmin = result);
+  }
+
+}

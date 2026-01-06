@@ -1,19 +1,15 @@
 const fs=require('fs');
 const path=require('path');
 
-const targetPath=path.join(__dirname,'src','configuration','app-config.ts');
-const dirPath=path.dirname(targetPath);
-
-if(!fs.existsSync(dirPath)) {
-    console.log(`Creating directory: ${dirPath}`);
-    fs.mkdirSync(dirPath,{recursive: true});
-}
-
+const targetPath=path.join(__dirname,'src','app','app.backend.ts');
 const backendUrl=process.env.BACKEND_URL||'http://localhost:8080';
 
 const configContent=`
+/* Do not edit - URL will be managed upon deployment to be overridden with prod URL when needed. */
+/* Defaults to the local URL for the dev env. */
+
 export const API_BACKEND_URL = '${backendUrl}';
 `;
 
 fs.writeFileSync(targetPath,configContent);
-console.log(`Configuration file for the API generated with backend URL : ${backendUrl}`);
+console.log(`Configuration file generated with the following backend URL : ${backendUrl}`);
