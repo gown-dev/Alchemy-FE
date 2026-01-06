@@ -8,29 +8,31 @@
 
 <!-- Navigation -->
 <nav class="nav">
-  <button class="img-btn">
-    <img src="/assets/webdesign/button/button1.png" alt="Social" />
-  </button>
-
-  <button class="img-btn">
-    <img src="/assets/webdesign/button/button1.png" alt="Pet page" />
-  </button>
-
-  <button class="img-btn">
-    <img src="/assets/webdesign/button/button1.png" alt="Adventure" />
-  </button>
-
-  <button class="img-btn">
-    <img src="/assets/webdesign/button/button1.png" alt="Games" />
-  </button>
-
-  <button class="img-btn">
-    <img src="/assets/webdesign/button/button1.png" alt="Shop" />
-  </button>
-
-  @if (isAdmin) {
-    <button class="img-btn">
-      <img src="/assets/webdesign/button/button1.png" alt="Admin" />
+  @if (isAuthenticated) {
+    <button class="img-btn btn">
+      <img src="/assets/webdesign/button/button1.png" alt="Social" />
     </button>
+
+    <button class="img-btn btn">
+      <img src="/assets/webdesign/button/button1.png" alt="Pet page" />
+    </button>
+
+    <button class="img-btn btn">
+      <img src="/assets/webdesign/button/button1.png" alt="Adventure" />
+    </button>
+
+    <button class="img-btn btn">
+      <img src="/assets/webdesign/button/button1.png" alt="Games" />
+    </button>
+
+    <button class="img-btn btn">
+      <img src="/assets/webdesign/button/button1.png" alt="Shop" />
+    </button>
+
+    @if (isAdmin) {
+      <button class="img-btn btn">
+        <img src="/assets/webdesign/button/button1.png" alt="Admin" />
+      </button>
+    }
   }
 </nav>

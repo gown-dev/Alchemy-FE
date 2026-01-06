@@ -1,0 +1,24 @@
+<div class="page flex-column">
+    <div class="content">
+        <div class="login-form-container">
+            <span id="login-form-title">Login</span>
+
+            <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form-fields">
+                <label id="label-username" class="label">Username</label>
+                <input id="input-username" formControlName="username" type="text" />
+
+                <label id="label-password" class="label">Password</label>
+                <input id="input-password" formControlName="password" type="password" />
+            </form>
+
+            <div id="login-button" class="btn" (click)="onSubmit()">
+                <img src="assets/webdesign/button/button1.png" id="login-button-image" class="grid-stacked" alt="Login" />
+                <span id="login-button-text" class="pixel-font grid-stacked">Login</span>
+            </div>
+
+            <div id="login-message">
+                <span id="login-message-text" class="pixel-font">{{ message }}</span>
+            </div>
+        </div>
+    </div>
+</div>

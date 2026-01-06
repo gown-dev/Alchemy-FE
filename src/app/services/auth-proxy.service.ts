@@ -9,8 +9,8 @@ import { AuthService } from '../api/services';
 })
 export class AuthProxyService {
 
-    private readonly ACCESS_TOKEN_KEY = 'access-token';
-    private readonly REFRESH_TOKEN_KEY = 'refresh-token';
+    private readonly ACCESS_TOKEN_KEY = 'alchemy-access-token';
+    private readonly REFRESH_TOKEN_KEY = 'alchemy-refresh-token';
 
     constructor(private authService: AuthService, private injector: Injector) { }
 

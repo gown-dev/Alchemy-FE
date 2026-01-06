@@ -1,0 +1,64 @@
+.page {
+    align-items: center;
+}
+
+.content {
+    margin: 50px;
+}
+
+.login-form-container {
+    background-color: blanchedalmond;
+    border: 2px solid gray;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 400px;
+}
+
+#login-form-title {
+    font-size: 32px;
+    text-shadow: 1px 1px 3px #e9dbc1;
+    color: #151515;
+}
+
+.login-form-fields {
+    display: grid;
+    grid-template: 
+        "label-username input-username input-username"
+        "label-password input-password input-password";
+    gap: 10px;
+}
+
+#label-username { grid-area: label-username; align-self: center; }
+#input-username { grid-area: input-username; align-self: center; }
+#label-password { grid-area: label-password; align-self: center; }
+#input-password { grid-area: input-password; align-self: center; }
+
+.label {
+    font-size: 16px;
+    text-shadow: 1px 1px 3px #e9dbc1;
+    color: #151515;
+}
+
+#login-button {
+    display: grid;
+}
+
+#login-button-image {
+    width: 104px;
+}
+
+#login-button-text {
+    padding-top: 10px;
+    font-size: 24px;
+    text-shadow: 1px 1px 3px #e9dbc1;
+    color: #151515;
+}
+
+#login-message-text {
+    display: block;
+    text-align: center;
+    color: rgb(168, 35, 35);
+}

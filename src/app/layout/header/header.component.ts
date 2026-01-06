@@ -9,12 +9,19 @@ import { AuthProxyService } from '../../services/auth-proxy.service';
 })
 export class HeaderComponent implements OnInit {
 
+  isAuthenticated: boolean = false;
   isAdmin: boolean = false;
 
   constructor(private authService: AuthProxyService) { }
 
   ngOnInit(): void {
-    this.authService.isAdminUser().subscribe(result => this.isAdmin = result);
+    this.authService.isAuthenticatedUser().subscribe(result => {
+      this.isAuthenticated = false;
+
+      if (this.isAuthenticated) {
+        this.authService.isAdminUser().subscribe(result => this.isAdmin = result);
+      }
+    });
   }
 
 }
