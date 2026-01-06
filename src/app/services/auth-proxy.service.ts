@@ -80,7 +80,12 @@ export class AuthProxyService {
     }
 
     isAdminUser(): Observable<boolean> {
-        return of(false);
+        return this.authService.account().pipe(
+            map(response => {
+                if (response.account == undefined) return false;
+                return (response.account.roles ?? []).includes("ADMIN");
+            })
+        );
     }
 
 }

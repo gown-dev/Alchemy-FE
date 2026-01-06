@@ -7,12 +7,17 @@ info:
 tags:
   - name: Auth
     description: Authentication related content
-
+    
+security:
+  - bearerAuth: []
+  
 paths:
+
   /auth/register:
     post:
       summary: Register a new account.
       operationId: register
+      security: []
       tags: 
         - Auth
       requestBody:
@@ -47,6 +52,7 @@ paths:
     post:
       summary: Request a bearer token
       operationId: login
+      security: []
       tags: 
         - Auth
       requestBody:
@@ -74,9 +80,10 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 
   /auth/refresh:
-    post:
+    get:
       summary: Request a new bearer token using an issued refresh token
       operationId: refresh
+      security: []
       tags:
         - Auth
       requestBody:
@@ -103,7 +110,236 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 
+  /auth/account:
+    get:
+      summary: Fetches the Account administrative informations
+      operationId: account
+      tags:
+        - Auth
+      responses:
+        '200':
+          description: Successfully fetched the Account administrative informations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+          
+  /admin/genes:
+    get:
+      summary: Request the list of pet genes options
+      operationId: getGenes
+      tags:
+        - Admin
+      responses:
+        '200':
+          description: Successfully fetched the list of pet genes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneListResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Create a pet gene.
+      operationId: createGene
+      tags:
+        - Admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneCreationRequest'
+      responses:
+        '200':
+          description: Successfully created the pet genes, returned the modified list of pet genes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneListResponse'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete a pet gene.
+      operationId: deleteGene
+      tags:
+        - Admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneDeletionRequest'
+      responses:
+        '200':
+          description: Successfully deleted the pet genes, returned the modified list of pet genes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneListResponse'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Synchronize the pet genes by sending the expected list of genes.
+      operationId: synchronizeGenes
+      tags:
+        - Admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneSynchronizationRequest'
+      responses:
+        '200':
+          description: Successfully synchronized the list of pet genes, returned the modified list of pet genes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneListResponse'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+          
+  /admin/moves:
+    get:
+      summary: Request the list of pet moves
+      operationId: getMoves
+      tags:
+        - Admin
+      responses:
+        '200':
+          description: Successfully fetched the list of pet moves.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveListResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Create a pet move.
+      operationId: createMove
+      tags:
+        - Admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoveCreationRequest'
+      responses:
+        '200':
+          description: Successfully created the pet move, returned the modified list of pet moves.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveListResponse'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete a pet move.
+      operationId: deleteMove
+      tags:
+        - Admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoveDeletionRequest'
+      responses:
+        '200':
+          description: Successfully deleted the pet moves, returned the modified list of pet moves.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveListResponse'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Modify a specific move, it's constraints and it's components.
+      operationId: updateMove
+      tags:
+        - Admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoveUpdateRequest'
+      responses:
+        '200':
+          description: Successfully synchronized the list of pet moves, returned the modified list of pet moves.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveListResponse'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
 components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: opaque
+      
   schemas:
     AccountRequest:
       type: object
@@ -136,6 +372,7 @@ components:
       properties:
         accessToken:
           type: string
+          format: uuid
           description: Bearer token.
           example: d0e6011c-0adc-4a75-97cb-92b462e27a7b
         accessExpirationTime:
@@ -145,6 +382,7 @@ components:
           example: 1985-04-12T23:20:50.52Z
         refreshToken:
           type: string
+          format: uuid
           description: Refresh token.
           example: d69a8eac-2dd3-4b25-bb71-72924a59b928
         refreshExpirationTime:
@@ -152,22 +390,126 @@ components:
           format: date-time
           description: Expiration of the Refresh token
           example: 1985-04-12T23:20:50.52Z
+          
+    AccountResponse:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/Account'
+            
+    GeneCreationRequest:
+      type: object
+      properties:
+        geneIdentifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneIdentification'
+            
+    GeneDeletionRequest:
+      type: object
+      properties:
+        geneIdentifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneIdentification'
+            
+    GeneSynchronizationRequest:
+      type: object
+      properties:
+        geneIdentifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneIdentification'
+          
+    GeneListResponse:
+      type: object
+      properties:
+        genes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gene'
+            
+    MoveCreationRequest:
+      type: object
+      properties:
+        moveIdentifications:
+          $ref: '#/components/schemas/MoveIdentification'
+            
+    MoveDeletionRequest:
+      type: object
+      properties:
+        moveIdentifications:
+          $ref: '#/components/schemas/MoveIdentification'
+            
+    MoveUpdateRequest:
+      type: object
+      properties:
+        move:
+          $ref: '#/components/schemas/Move'
+            
+    MoveListResponse:
+      type: object
+      properties:
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/Move'
+          
+    MoveResponse:
+      type: object
+      properties:
+        move:
+          $ref: '#/components/schemas/Move'
         
     ErrorResponse:
       type: object
       properties:
         code:
           type: string
-          description: Error code.
-          example: ERR_T001
+          description: Error code
+          example: ERR_AUTH-T001
         description:
           type: string
           description: Error description
           example: Malformed authentication
         message:
           type: string
-          description: Error message.
+          description: Error message
           example: The authentication object was malformed, and the application was unable to read it.
+        
+    ConfirmationResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Confirmation error code
+          example: CONF_ADM-C001
+        description:
+          type: string
+          description: Confirmation error description
+          example: Genes Synchronization
+        message:
+          type: string
+          description: Confirmation error message.
+          example: Requested synchronization causes the deletion of the following gene(s) -> Unicorn horns ; Please confirm by using the confirmation header.
+        confirmationKey:
+          type: string
+          description: Header to use to confirm the request
+          example: x-confirm-sync-genes
+          
+    Account:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Account username
+          example: Gown
+        roles:
+          type: array
+          items: 
+            type: string
+            description: Account roles
+            example: [ADMIN, USER]
     
     AccountSummary:
       type: object
@@ -218,27 +560,196 @@ components:
           type: object
           properties:
             horns:
-              $ref: "#/components/schemas/BodyPart"
+              $ref: "#/components/schemas/Gene"
             ears:
-              $ref: "#/components/schemas/BodyPart"
+              $ref: "#/components/schemas/Gene"
             head:
-              $ref: "#/components/schemas/BodyPart"
+              $ref: "#/components/schemas/Gene"
             floof:
-              $ref: "#/components/schemas/BodyPart"
+              $ref: "#/components/schemas/Gene"
             wings:
-              $ref: "#/components/schemas/BodyPart"
+              $ref: "#/components/schemas/Gene"
             body:
-              $ref: "#/components/schemas/BodyPart"
+              $ref: "#/components/schemas/Gene"
             tail:
-              $ref: "#/components/schemas/BodyPart"
+              $ref: "#/components/schemas/Gene"
 
-    BodyPart:
+    GeneIdentification:
       type: object
       properties:
-        id:
+        image:
+          type: string
+          description: Image file location
+          example: /assets/body/body-fox.png
+        name:
+          type: string
+          description: Name of the gene
+          example: Unicorn horn
+          
+    Gene:
+      type: object
+      properties:
+        identification:
+          $ref: "#/components/schemas/GeneIdentification"
+        type:
+          $ref: '#/components/schemas/GeneType'
+        tags:
+          type: array
+          items: 
+            type: string
+            description: Tag value associated with the Gene
+            example: Horn
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Constraint'
+            
+    GeneType:
+      type: string
+      description: Type of the gene
+      enum:
+        - HORNS
+        - EARS
+        - HEAD
+        - FLOOF
+        - BODY
+        - WINGS
+        - TAIL
+      example: HORNS
+      
+    MoveIdentification:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the move
+          example: Fireball
+        tags:
+          type: array
+          items: 
+            type: string
+            description: Tag value associated with the Gene
+            example: Fire
+            
+    Move: 
+      type: object
+      properties:
+        identification:
+          $ref: '#/components/schemas/MoveIdentification'
+        constraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Constraint'
+        cooldown:
           type: integer
-          description: Body part numeric identifier
-          example: 4
+          description: Cooldown of the move, as a number of turns.
+          example: 3
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoveComponent'
+            
+    MoveComponent:
+      type: object
+      required:
+        - type
+      oneOf:
+        - $ref: '#/components/schemas/DamageComponent'
+      discriminator:
+        propertyName: type
+        mapping:
+          DAMAGE_COMPONENT: '#/components/schemas/DamageComponent'
+          
+    DamageComponent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Type of the component
+        baseDamage:
+          type: integer
+          description: Base damage amount of the move
+          example: 10
+        baseBypass:
+          type: integer
+          description: Base bypass damage amount of the move
+          example: 3
+        damageType:
+          $ref: '#/components/schemas/DamageType'
+          
+    DamageType:
+      type: string
+      description: Damage type of the component
+      enum:
+        - PHYSICAL
+        - MAGICAL
+      example: PHYSICAL
+          
+    Constraint:
+      type: object
+      required:
+        - type
+      oneOf:
+        - $ref: '#/components/schemas/AttributeRequirement'
+        - $ref: '#/components/schemas/AttributeRestriction'
+      discriminator:
+        propertyName: type
+        mapping:
+          ATTRIBUTE_REQUIREMENT: '#/components/schemas/AttributeRequirement'
+          ATTRIBUTE_RESTRICTION: '#/components/schemas/AttributeRestriction'
+          
+    AttributeRequirement:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Type of the constraint
+        attribute:
+          $ref: '#/components/schemas/Attribute'
+        threshold:
+          type: integer
+          description: Threshold to fit with the requirement
+          example: 10
+          
+    AttributeRestriction:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Type of the constraint
+        attribute:
+          $ref: '#/components/schemas/Attribute'
+        threshold:
+          type: integer
+          description: Threshold not to reach to fit the restriction
+          example: 10
+          
+    Attribute:
+      type: string
+      description: Attribute of the constraint
+      enum:
+        - STRENGTH
+        - CONSTITUTION
+        - AGILITY
+        - INTELLECT
+        - WILLPOWER
+        - TOUGHNESS
+        - PRECISION
+        - FOCUS
+        - MOMENTUM
+        - DEFENCE
+        - ADAPTATION
+        - RESOLVE
+        - CLARITY
+        - INSTINCT
+        - MASTERY
+      example: INTELLECT
 
     Announcement:
       type: object
@@ -291,9 +802,7 @@ components:
         description:
           type: string
           description: Description of the event
-          example: Gown entered the competition "Winter"
-
-    
+          example: Gown entered the competition "Winter".
 
   responses:
     UnauthorizedError:
