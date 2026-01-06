@@ -5,7 +5,7 @@
     "prestart": "npm run openapi",
     "prebuild": "node set-env.js && npm run openapi",
     "ng": "ng",
-    "openapi": "ng-openapi-gen --input openapi/api-alchemy.yaml --output src/app/api",
+    "openapi": "ng-openapi-gen --input openapi/api-alchemy.yaml --output src/app/api --promises false --services all",
     "start": "ng serve",
     "build": "ng build --configuration production --base-href /",
     "watch": "ng build --watch --configuration development",
