@@ -8,28 +8,23 @@
       />
 
       <div class="feather-content">
-        <h2 class="feather-title">Sign up now</h2>
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h2 class="feather-title">Sign in now</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="field">
             <label>Username</label>
             <input type="text" name="username" formControlName="username"/>
           </div>
-
-<!--          <div class="field">-->
-<!--            <label>Email</label>-->
-<!--            <input type="email" name="email" formControlName="email"/>-->
-<!--          </div>-->
 
           <div class="field">
             <label>Password</label>
             <input type="password" name="password" formControlName="password"/>
           </div>
 
-          <!-- Register button -->
+          <!-- Login button -->
           <div class="field center">
-            <button class="register-btn" type="submit" [disabled]="!registerForm.valid">
-              <img src="assets/webdesign/button/button1.png" alt="Register" />
-              <span>Register</span>
+            <button class="login-btn" type="submit" [disabled]="!loginForm.valid">
+              <img src="assets/webdesign/button/button1.png" alt="Login" />
+              <span>Sign In</span>
             </button>
           </div>
         </form>
