@@ -15,14 +15,25 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required])
   });
 
+  protected errorMessage:string = '';
+
   constructor(private authProxyService:AuthProxyService, private router:Router) {
   }
 
   onSubmit() {
-    if(this.loginForm.invalid) return;
-    this.authProxyService.login(this.loginForm.value.username!, this.loginForm.value.password!)
-      .subscribe(response => {
-        this.router.navigate(['/home']);
+    this.errorMessage = '';
+    if(this.loginForm.valid) {
+    this.authProxyService.login(this.loginForm.value.username || "", this.loginForm.value.password || "")
+      .subscribe({
+        next: response => {
+          this.router.navigate(['/home']);
+        },
+        error: error => {
+          if(error.error?.message) {
+            this.errorMessage = error.error.message;
+          }
+        }
       });
+    }
   }
 }
