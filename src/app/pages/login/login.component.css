@@ -121,3 +121,7 @@
 .login-btn:active img {
   transform: translateY(1px);
 }
+
+.error-message {
+  color: red;
+}

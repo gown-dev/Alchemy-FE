@@ -13,6 +13,13 @@
           <div class="field">
             <label>Username</label>
             <input type="text" name="username" formControlName="username"/>
+            @if (registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)) {
+              <div class="error-message">
+                @if (registerForm.get('username')?.hasError('required')) {
+                  <span>Username is required.</span>
+                }
+              </div>
+            }
           </div>
 
 <!--          <div class="field">-->
@@ -23,7 +30,23 @@
           <div class="field">
             <label>Password</label>
             <input type="password" name="password" formControlName="password"/>
+            @if (registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)) {
+              <div class="error-message">
+                @if (registerForm.get('password')?.hasError('required')) {
+                  <span>Password is required.</span>
+                }
+                @if (registerForm.get('password')?.hasError('minlength')) {
+                  <span>Password must be at least 8 characters.</span>
+                }
+              </div>
+            }
           </div>
+
+          @if (errorMessage) {
+            <div class="field">
+              <div class="error-message">{{errorMessage}}</div>
+            </div>
+          }
 
           <!-- Register button -->
           <div class="field center">

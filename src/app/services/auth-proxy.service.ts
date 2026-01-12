@@ -18,22 +18,19 @@ export class AuthProxyService {
         return this.authService.register({ body: { username: username, password: password } });
     }
 
-    login(username: string, password: string): Observable<number | ErrorResponse> {
-        return this.authService.login({ body: { username: username, password: password } }).pipe(
-            tap((token) => {
-                console.debug("Storing tokens.");
-                localStorage.setItem(this.ACCESS_TOKEN_KEY, token.accessToken!);
-                localStorage.setItem(this.REFRESH_TOKEN_KEY, token.refreshToken!);
-            }),
-            map(() => {
-                console.debug("Login successful.");
-                return 200;
-            }),
-            catchError((error: HttpErrorResponse) => {
-                let errorBody = error.error as Error;
-                return of(errorBody);
-            })
-        );
+  login(username: string, password: string): Observable<number> {
+      // Will either return a number or let the error bubble up.
+      return this.authService.login({ body: { username: username, password: password } }).pipe(
+          tap((token) => {
+              console.debug("Storing tokens.");
+              localStorage.setItem(this.ACCESS_TOKEN_KEY, token.accessToken!);
+              localStorage.setItem(this.REFRESH_TOKEN_KEY, token.refreshToken!);
+          }),
+          map(() => {
+              console.debug("Login successful.");
+              return 200;
+          }),
+      );
     }
 
     getBearerToken(): Observable<string | undefined> {
