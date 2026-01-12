@@ -26,7 +26,14 @@ export class LoginComponent {
     this.authProxyService.login(this.loginForm.value.username || "", this.loginForm.value.password || "")
       .subscribe({
         next: response => {
-          this.router.navigate(['/home']);
+          this.authProxyService.isAdminUser().subscribe(isAdmin => {
+            console.log('isAdmin', isAdmin);
+            if (isAdmin) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/home']);
+            }
+          })
         },
         error: error => {
           if(error.error?.message) {

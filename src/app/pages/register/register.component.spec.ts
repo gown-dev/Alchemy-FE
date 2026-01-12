@@ -8,26 +8,30 @@ import { of } from 'rxjs';
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
-  let authProxyServiceSpy: jasmine.SpyObj<AuthProxyService>;
-  let routerSpy: jasmine.SpyObj<Router>;
+  let authProxyServiceMock: any;
+  let routerMock: any;
 
   beforeEach(async () => {
-    const spy = jasmine.createSpyObj('AuthProxyService', ['register']);
-    const routerSpyObj = jasmine.createSpyObj('Router', ['navigate']);
+    authProxyServiceMock = {
+      register: jasmine.createSpy('register').and.returnValue(of(200)),
+      isAdminUser: jasmine.createSpy('isAdminUser').and.returnValue(of(false))
+    };
+
+    routerMock = {
+      navigate: jasmine.createSpy('navigate')
+    };
 
     await TestBed.configureTestingModule({
       imports: [RegisterComponent, ReactiveFormsModule],
       providers: [
-        {provide: AuthProxyService, useValue: spy},
-        {provide: Router, useValue: routerSpyObj}
+        {provide: AuthProxyService, useValue: authProxyServiceMock},
+        {provide: Router, useValue: routerMock}
       ]
     })
       .compileComponents();
 
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
-    authProxyServiceSpy = TestBed.inject(AuthProxyService) as jasmine.SpyObj<AuthProxyService>;
-    routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     fixture.detectChanges();
   });
 
@@ -65,20 +69,16 @@ describe('RegisterComponent', () => {
 
     component.onSubmit();
 
-    expect(authProxyServiceSpy.register).not.toHaveBeenCalled();
+    expect(authProxyServiceMock.register).not.toHaveBeenCalled();
   });
 
   it('should call AuthProxyService.register when form is valid', () => {
-    const username = 'testuser';
-    const password = 'password123';
-    authProxyServiceSpy.register.and.returnValue(of({} as any));
-
-    component.registerForm.get('username')?.setValue(username);
-    component.registerForm.get('password')?.setValue(password);
+    component.registerForm.get('username')!.setValue('testuser');
+    component.registerForm.get('password')!.setValue('password123');
 
     component.onSubmit();
 
-    expect(authProxyServiceSpy.register).toHaveBeenCalledWith(username, password);
+    expect(authProxyServiceMock.register).toHaveBeenCalledWith('testuser', 'password123');
   });
 
   it('should disable the submit button when the form is invalid', () => {
@@ -101,16 +101,26 @@ describe('RegisterComponent', () => {
     expect(submitBtn.disabled).toBeFalsy();
   });
 
-  it('should redirect to /login on successful registration', () => {
-    const username = 'testuser';
-    const password = 'password123';
-    authProxyServiceSpy.register.and.returnValue(of({} as any));
+  it('should redirect to /home on successful registration for normal user', () => {
+    authProxyServiceMock.isAdminUser.and.returnValue(of(false));
 
-    component.registerForm.get('username')?.setValue(username);
-    component.registerForm.get('password')?.setValue(password);
+    component.registerForm.get('username')!.setValue('testuser');
+    component.registerForm.get('password')!.setValue('password123');
 
     component.onSubmit();
 
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/login']);
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/home']);
   });
+
+  it('should redirect to /admin on successful registration for admin user', () => {
+    authProxyServiceMock.isAdminUser.and.returnValue(of(true));
+
+    component.registerForm.get('username')!.setValue('adminuser');
+    component.registerForm.get('password')!.setValue('password123');
+
+    component.onSubmit();
+
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/admin']);
+  });
+
 });
