@@ -29,7 +29,14 @@ export class RegisterComponent {
       this.authProxyService.register(this.registerForm.value.username || "", this.registerForm.value.password || "")
         .subscribe({
           next: response => {
-            this.router.navigate(['/login']);
+            this.authProxyService.isAdminUser().subscribe(isAdmin => {
+              console.log('isAdmin', isAdmin);
+              if (isAdmin) {
+                this.router.navigate(['/admin']);
+              } else {
+                this.router.navigate(['/home']);
+              }
+            })
           },
           error: error => {
             if(error.error?.message) {

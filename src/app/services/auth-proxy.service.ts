@@ -15,20 +15,23 @@ export class AuthProxyService {
     constructor(private authService: AuthService, private injector: Injector) { }
 
     register(username: string, password: string): Observable<TokenResponse> {
-        return this.authService.register({ body: { username: username, password: password } });
+      // Will either return a TokenResponse or let the error bubble up.
+      return this.authService.register({ body: { username: username, password: password } }).pipe(
+        tap((token) => {
+          console.debug("Login successful.  Storing tokens.");
+          localStorage.setItem(this.ACCESS_TOKEN_KEY, token.accessToken!);
+          localStorage.setItem(this.REFRESH_TOKEN_KEY, token.refreshToken!);
+        }),
+      );
     }
 
-  login(username: string, password: string): Observable<number> {
-      // Will either return a number or let the error bubble up.
+  login(username: string, password: string): Observable<TokenResponse> {
+      // Will either return a TokenResponse or let the error bubble up.
       return this.authService.login({ body: { username: username, password: password } }).pipe(
           tap((token) => {
-              console.debug("Storing tokens.");
+              console.debug("Login successful.  Storing tokens.");
               localStorage.setItem(this.ACCESS_TOKEN_KEY, token.accessToken!);
               localStorage.setItem(this.REFRESH_TOKEN_KEY, token.refreshToken!);
-          }),
-          map(() => {
-              console.debug("Login successful.");
-              return 200;
           }),
       );
     }
@@ -77,8 +80,10 @@ export class AuthProxyService {
     }
 
     isAdminUser(): Observable<boolean> {
+      let accessToken = localStorage.getItem(this.ACCESS_TOKEN_KEY);
         return this.authService.account().pipe(
             map(response => {
+              console.debug('isAdminUser() response: ' + JSON.stringify(response, null, 2));
                 if (response.account == undefined) return false;
                 return (response.account.roles ?? []).includes("ADMIN");
             })

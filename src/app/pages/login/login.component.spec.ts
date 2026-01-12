@@ -13,7 +13,8 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     authProxyServiceMock = {
-      login: jasmine.createSpy('login').and.returnValue(of(200))
+      login: jasmine.createSpy('login').and.returnValue(of(200)),
+      isAdminUser: jasmine.createSpy('isAdminUser').and.returnValue(of(false))
     };
 
     routerMock = {
@@ -102,12 +103,23 @@ describe('LoginComponent', () => {
     expect(submitBtn.disabled).toBeFalsy();
   });
 
-  it('should redirect to /home on successful login', () => {
+  it('should redirect to /home on successful login for normal users', () => {
+    authProxyServiceMock.isAdminUser.and.returnValue(of(false));
     component.loginForm.get('username')!.setValue('testuser');
     component.loginForm.get('password')!.setValue('password123');
 
     component.onSubmit();
 
     expect(routerMock.navigate).toHaveBeenCalledWith(['/home']);
+  });
+
+  it('should redirect to /admin on successful login for admin users', () => {
+    authProxyServiceMock.isAdminUser.and.returnValue(of(true));
+    component.loginForm.get('username')!.setValue('adminuser');
+    component.loginForm.get('password')!.setValue('password123');
+
+    component.onSubmit();
+
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/admin']);
   });
 });
