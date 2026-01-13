@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import {AuthProxyService} from '../../services/auth-proxy.service';
 import {Router} from '@angular/router';
+import {take} from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -27,9 +28,9 @@ export class RegisterComponent {
     this.errorMessage = '';
     if(this.registerForm.valid) {
       this.authProxyService.register(this.registerForm.value.username || "", this.registerForm.value.password || "")
-        .subscribe({
+        .pipe(take(1)).subscribe({
           next: response => {
-            this.authProxyService.isAdminUser().subscribe(isAdmin => {
+            this.authProxyService.isAdminUser().pipe(take(1)).subscribe(isAdmin => {
               console.log('isAdmin', isAdmin);
               if (isAdmin) {
                 this.router.navigate(['/admin']);
