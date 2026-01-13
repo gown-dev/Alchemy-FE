@@ -80,7 +80,6 @@ export class AuthProxyService {
     }
 
     isAdminUser(): Observable<boolean> {
-      let accessToken = localStorage.getItem(this.ACCESS_TOKEN_KEY);
         return this.authService.account().pipe(
             map(response => {
               console.debug('isAdminUser() response: ' + JSON.stringify(response, null, 2));

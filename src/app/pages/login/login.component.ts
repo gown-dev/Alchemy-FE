@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import {AuthProxyService} from '../../services/auth-proxy.service';
 import {Router} from '@angular/router';
+import {map, take} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -24,18 +25,20 @@ export class LoginComponent {
     this.errorMessage = '';
     if(this.loginForm.valid) {
     this.authProxyService.login(this.loginForm.value.username || "", this.loginForm.value.password || "")
-      .subscribe({
+      .pipe(take(1)).subscribe({
         next: response => {
-          this.authProxyService.isAdminUser().subscribe(isAdmin => {
+          console.log('response', response);
+          this.authProxyService.isAdminUser().pipe(take(1)).subscribe(isAdmin => {
             console.log('isAdmin', isAdmin);
             if (isAdmin) {
               this.router.navigate(['/admin']);
             } else {
               this.router.navigate(['/home']);
             }
-          })
+          });
         },
         error: error => {
+          console.log('error', error);
           if(error.error?.message) {
             this.errorMessage = error.error.message;
           }
