@@ -41,8 +41,8 @@
 
 .admin-box .admin-label {
   font-size: 32px;
-  font-family: "Gentium Book Plus", serif;
-  font-style: bold;
+  font-family: "Gentium Book Basic", serif;
+  font-weight: bold;
 }
 
 .admin-box img {
@@ -51,9 +51,9 @@
 }
 
 .admin-box button {
-  font-family: "Gentium Book Plus", serif;
+  font-family: "Gentium Book Basic", serif;
   font-size: 24px;
-  font-style: bold;
+  font-weight: bold;
   color: #303030;
   background-color: #92A1D5;
   border-radius: 8px;
