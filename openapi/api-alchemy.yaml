@@ -7,10 +7,10 @@ info:
 tags:
   - name: Auth
     description: Authentication related content
-    
+
 security:
   - bearerAuth: []
-  
+
 paths:
 
   /auth/register:
@@ -18,7 +18,7 @@ paths:
       summary: Register a new account.
       operationId: register
       security: []
-      tags: 
+      tags:
         - Auth
       requestBody:
         required: true
@@ -47,13 +47,13 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '500':
           $ref: '#/components/responses/InternalServerError'
-          
+
   /auth/login:
     post:
       summary: Request a bearer token
       operationId: login
       security: []
-      tags: 
+      tags:
         - Auth
       requestBody:
         required: true
@@ -80,7 +80,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 
   /auth/refresh:
-    get:
+    post:
       summary: Request a new bearer token using an issued refresh token
       operationId: refresh
       security: []
@@ -127,7 +127,7 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '500':
           $ref: '#/components/responses/InternalServerError'
-          
+
   /admin/genes:
     get:
       summary: Request the list of pet genes options
@@ -229,7 +229,7 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '500':
           $ref: '#/components/responses/InternalServerError'
-          
+
   /admin/moves:
     get:
       summary: Request the list of pet moves
@@ -339,7 +339,7 @@ components:
       type: http
       scheme: bearer
       bearerFormat: opaque
-      
+
   schemas:
     AccountRequest:
       type: object
@@ -390,13 +390,13 @@ components:
           format: date-time
           description: Expiration of the Refresh token
           example: 1985-04-12T23:20:50.52Z
-          
+
     AccountResponse:
       type: object
       properties:
         account:
           $ref: '#/components/schemas/Account'
-            
+
     GeneCreationRequest:
       type: object
       properties:
@@ -404,7 +404,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GeneIdentification'
-            
+
     GeneDeletionRequest:
       type: object
       properties:
@@ -412,7 +412,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GeneIdentification'
-            
+
     GeneSynchronizationRequest:
       type: object
       properties:
@@ -420,7 +420,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GeneIdentification'
-          
+
     GeneListResponse:
       type: object
       properties:
@@ -428,25 +428,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Gene'
-            
+
     MoveCreationRequest:
       type: object
       properties:
         moveIdentifications:
           $ref: '#/components/schemas/MoveIdentification'
-            
+
     MoveDeletionRequest:
       type: object
       properties:
         moveIdentifications:
           $ref: '#/components/schemas/MoveIdentification'
-            
+
     MoveUpdateRequest:
       type: object
       properties:
         move:
           $ref: '#/components/schemas/Move'
-            
+
     MoveListResponse:
       type: object
       properties:
@@ -454,13 +454,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Move'
-          
+
     MoveResponse:
       type: object
       properties:
         move:
           $ref: '#/components/schemas/Move'
-        
+
     ErrorResponse:
       type: object
       properties:
@@ -476,7 +476,7 @@ components:
           type: string
           description: Error message
           example: The authentication object was malformed, and the application was unable to read it.
-        
+
     ConfirmationResponse:
       type: object
       properties:
@@ -496,7 +496,7 @@ components:
           type: string
           description: Header to use to confirm the request
           example: x-confirm-sync-genes
-          
+
     Account:
       type: object
       properties:
@@ -506,11 +506,11 @@ components:
           example: Gown
         roles:
           type: array
-          items: 
+          items:
             type: string
             description: Account roles
             example: [ADMIN, USER]
-    
+
     AccountSummary:
       type: object
       properties:
@@ -585,7 +585,7 @@ components:
           type: string
           description: Name of the gene
           example: Unicorn horn
-          
+
     Gene:
       type: object
       properties:
@@ -595,7 +595,7 @@ components:
           $ref: '#/components/schemas/GeneType'
         tags:
           type: array
-          items: 
+          items:
             type: string
             description: Tag value associated with the Gene
             example: Horn
@@ -603,7 +603,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Constraint'
-            
+
     GeneType:
       type: string
       description: Type of the gene
@@ -616,7 +616,7 @@ components:
         - WINGS
         - TAIL
       example: HORNS
-      
+
     MoveIdentification:
       type: object
       properties:
@@ -626,12 +626,12 @@ components:
           example: Fireball
         tags:
           type: array
-          items: 
+          items:
             type: string
             description: Tag value associated with the Gene
             example: Fire
-            
-    Move: 
+
+    Move:
       type: object
       properties:
         identification:
@@ -648,7 +648,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MoveComponent'
-            
+
     MoveComponent:
       type: object
       required:
@@ -659,7 +659,7 @@ components:
         propertyName: type
         mapping:
           DAMAGE_COMPONENT: '#/components/schemas/DamageComponent'
-          
+
     DamageComponent:
       type: object
       required:
@@ -678,7 +678,7 @@ components:
           example: 3
         damageType:
           $ref: '#/components/schemas/DamageType'
-          
+
     DamageType:
       type: string
       description: Damage type of the component
@@ -686,7 +686,7 @@ components:
         - PHYSICAL
         - MAGICAL
       example: PHYSICAL
-          
+
     Constraint:
       type: object
       required:
@@ -699,7 +699,7 @@ components:
         mapping:
           ATTRIBUTE_REQUIREMENT: '#/components/schemas/AttributeRequirement'
           ATTRIBUTE_RESTRICTION: '#/components/schemas/AttributeRestriction'
-          
+
     AttributeRequirement:
       type: object
       required:
@@ -714,7 +714,7 @@ components:
           type: integer
           description: Threshold to fit with the requirement
           example: 10
-          
+
     AttributeRestriction:
       type: object
       required:
@@ -729,7 +729,7 @@ components:
           type: integer
           description: Threshold not to reach to fit the restriction
           example: 10
-          
+
     Attribute:
       type: string
       description: Attribute of the constraint
