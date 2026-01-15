@@ -31,7 +31,6 @@ export class RegisterComponent {
         .pipe(take(1)).subscribe({
           next: response => {
             this.authProxyService.isAdminUser().pipe(take(1)).subscribe(isAdmin => {
-              console.log('isAdmin', isAdmin);
               if (isAdmin) {
                 this.router.navigate(['/admin']);
               } else {

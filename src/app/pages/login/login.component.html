@@ -39,7 +39,7 @@
               <div class="error-message">{{errorMessage}}</div>
             </div>
           }
-          
+
           <!-- Login button -->
           <div class="field center">
             <button class="login-btn" type="submit" [disabled]="!loginForm.valid">
@@ -47,6 +47,8 @@
               <span>Sign In</span>
             </button>
           </div>
+
+          <div class="field center reg-link"><a routerLink="/register">Don't have an account? Register</a></div>
         </form>
       </div>
     </div>
