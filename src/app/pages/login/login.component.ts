@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import {AuthProxyService} from '../../services/auth-proxy.service';
-import {Router} from '@angular/router';
-import {map, take} from 'rxjs';
+import { AuthProxyService } from '../../services/auth-proxy.service';
+import { Router, RouterLink } from '@angular/router';
+import { map, take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -27,9 +27,7 @@ export class LoginComponent {
     this.authProxyService.login(this.loginForm.value.username || "", this.loginForm.value.password || "")
       .pipe(take(1)).subscribe({
         next: response => {
-          console.log('response', response);
           this.authProxyService.isAdminUser().pipe(take(1)).subscribe(isAdmin => {
-            console.log('isAdmin', isAdmin);
             if (isAdmin) {
               this.router.navigate(['/admin']);
             } else {
@@ -38,7 +36,6 @@ export class LoginComponent {
           });
         },
         error: error => {
-          console.log('error', error);
           if(error.error?.message) {
             this.errorMessage = error.error.message;
           }
