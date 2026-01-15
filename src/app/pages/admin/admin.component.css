@@ -35,31 +35,20 @@
   height: 300px;
   margin: 1rem;
   position: relative;
-}
-
-.admin-box .admin-box-background {
-  background-color: #FFEBCD;
+  background-color: rgba(255, 235, 205, 0.8); /* #FFEBCD 80% */
+  border: 2px solid rgba(157, 157, 157, 0.8); /* #9D9D9D 80% */
   border-radius: 5px;
-  border: 2px solid #9D9D9D;
-  opacity: 80%;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 .admin-box .admin-label {
   font-size: 32px;
   font-family: "Gentium Book Basic", serif;
   font-weight: bold;
-  position: relative;
 }
 
 .admin-box img {
   width: 80px;
   height: 80px;
-  position: relative;
 }
 
 .admin-box button {
@@ -72,5 +61,4 @@
   border-width: 0;
   width: 150px;
   height: 40px;
-  position: relative;
 }
