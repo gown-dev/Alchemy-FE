@@ -1,7 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorResponse, TokenResponse } from '../api/models';
+import {AccountResponse, ErrorResponse, TokenResponse} from '../api/models';
 import { AuthService } from '../api/services';
 
 @Injectable({
@@ -11,6 +11,8 @@ export class AuthProxyService {
 
     private readonly ACCESS_TOKEN_KEY = 'access-token';
     private readonly REFRESH_TOKEN_KEY = 'refresh-token';
+
+    private accountCache:AccountResponse | undefined;
 
     constructor(private authService: AuthService, private injector: Injector) { }
 
@@ -80,11 +82,15 @@ export class AuthProxyService {
     }
 
     isAdminUser(): Observable<boolean> {
+      if(this.accountCache != undefined) {
+        return of(this.accountCache.account?.roles?.includes("ADMIN") || false);
+      }
+
         return this.authService.account().pipe(
             map(response => {
-              console.debug('isAdminUser() response: ' + JSON.stringify(response, null, 2));
-                if (response.account == undefined) return false;
-                return (response.account.roles ?? []).includes("ADMIN");
+              if (response.account == undefined) return false;
+              this.accountCache = response;
+              return (response.account.roles ?? []).includes("ADMIN");
             })
         );
     }
