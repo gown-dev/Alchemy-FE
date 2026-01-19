@@ -66,15 +66,15 @@ app-sprite {
 
 #preview-front {
   position: absolute;
-  left: 87px;
-  top: 46px;
+  left: 95px;
+  top: 30px;
   scale: 2;
 }
 
 #preview-back {
   position: absolute;
   /*left: 205px;*/
-  left: 331px;
+  left: 338px;
   top: -11px;
   scale: 2;
   transform: scaleX(-1);
