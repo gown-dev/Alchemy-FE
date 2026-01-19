@@ -7,6 +7,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { AdminClothesComponent } from './admin/clothes/clothes.component';
 import { AdminGenesComponent } from './admin/genes/genes.component';
+import { WardrobeComponent } from './pages/wardrobe/wardrobe.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,4 +17,5 @@ export const routes: Routes = [
   { path: 'admin/clothing', component: AdminClothesComponent, canActivate: [AdminGuard] },
   { path: 'admin/genes', component: AdminGenesComponent, canActivate: [AdminGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'wardrobe', component: WardrobeComponent, canActivate: [AuthGuard] },
 ];

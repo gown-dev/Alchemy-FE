@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Base Body",
+    "category": "body",
+    "images": ["body.png"],
+    "previewOffset": 0
+  },
+  {
+    "name": "Cloak",
+    "category": "cloak",
+    "images": ["w_cloak_front.png", "w_cloak_back.png"],
+    "previewOffset": 30
+  },
+  {
+    "name": "Hair Style 1",
+    "category": "hair",
+    "images": ["w_hair1.png"],
+    "previewOffset": 5
+  },
+  {
+    "name": "Hair Style 2",
+    "category": "hair",
+    "images": ["w_hair2.png"],
+    "previewOffset": 5
+  },
+  {
+    "name": "Witch Hat",
+    "category": "hat",
+    "images": ["w_hat1.png"],
+    "previewOffset": -20
+  },
+  {
+    "name": "Pants",
+    "category": "pants",
+    "images": ["w_pants.png"],
+    "previewOffset": 29
+  },
+  {
+    "name": "Shoes",
+    "category": "shoes",
+    "images": ["w_shoes.png"],
+    "previewOffset": 65
+  },
+  {
+    "name": "Socks",
+    "category": "socks",
+    "images": ["w_socks.png"],
+    "previewOffset": 55
+  },
+  {
+    "name": "Top",
+    "category": "shirt",
+    "images": ["w_top.png"],
+    "previewOffset": 20
+  }
+]

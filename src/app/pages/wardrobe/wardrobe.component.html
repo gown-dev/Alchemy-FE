@@ -1,0 +1,38 @@
+<div class="page">
+  <div class="content">
+    <div class="wardrobe-container">
+      <div class="preview-room">
+        <div id="preview-back">
+          <ng-container *ngFor="let item of selectedItems.slice().reverse()">
+            <app-sprite *ngIf="item?.images?.at(1)"
+                        [spriteUrl]="'/assets/wardrobe/' + item.images[1]"
+                        [spritePositionX]="1"></app-sprite>
+          </ng-container>
+          <ng-container *ngFor="let item of selectedItems">
+            <app-sprite *ngIf="item?.images?.at(0)"
+                        [spriteUrl]="'/assets/wardrobe/' + item.images[0]"
+                        [spritePositionX]="1"></app-sprite>
+          </ng-container>
+        </div>
+        <img class="room" src="/assets/webdesign/misc/wardrobe-sketch.png" alt="Preview room" />
+        <div id="preview-front">
+          <ng-container *ngFor="let item of selectedItems.slice().reverse()">
+            <app-sprite *ngIf="item?.images?.at(1)"
+                        [spriteUrl]="'/assets/wardrobe/' + item.images[1]"
+                        [spritePositionX]="0"></app-sprite>
+          </ng-container>
+          <ng-container *ngFor="let item of selectedItems">
+            <app-sprite *ngIf="item?.images?.at(0)"
+                        [spriteUrl]="'/assets/wardrobe/' + item.images[0]"
+                        [spritePositionX]="0"></app-sprite>
+          </ng-container>
+        </div>
+      </div>
+      <div class="wardrobe-items">
+        <app-item *ngFor="let item of wardrobeItems" [item]="item" (click)="toggleSelectedItem(item)"
+                  [ngClass]="{'selected': selectedItems.includes(item)}"></app-item>
+      </div>
+    </div>
+  </div>
+</div>
+<p>wardrobe works!</p>

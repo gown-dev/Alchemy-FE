@@ -1,0 +1,5 @@
+.sprite {
+  width: 64px;
+  height: 128px;
+  image-rendering: pixelated;
+}
