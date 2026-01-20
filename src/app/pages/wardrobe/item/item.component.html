@@ -1,8 +1,8 @@
 <div class="wardrobe-item">
   <div class="preview">
-    <ng-container *ngFor="let image of item?.images?.slice()?.reverse()">
+    <ng-container *ngFor="let image of item?.images?.at(version)?.slice()?.reverse()">
       <app-sprite
-        [spriteUrl]="image ? '/assets/wardrobe/' +image : ''"
+        [spriteUrl]="image ? '/assets/wardrobe/' + image : ''"
         [spritePositionX]="0"
         [style.top]="0-(item?.previewOffset ?? 0) + 'px'"
       ></app-sprite>

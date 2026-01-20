@@ -2,55 +2,107 @@
   {
     "name": "Base Body",
     "category": "body",
-    "images": ["body.png"],
+    "images": [
+      ["base1.png"],
+      ["base2.png"],
+      ["base3.png"],
+      ["base4.png"],
+      ["base5.png"],
+      ["base6.png"],
+      ["base7.png"],
+      ["base8.png"],
+      ["base9.png"],
+      ["base10.png"]
+    ],
     "previewOffset": 0
   },
   {
     "name": "Cloak",
     "category": "cloak",
-    "images": ["w_cloak_front.png", "w_cloak_back.png"],
+    "images": [
+      ["cloak1.png", "cloak1_bg.png"],
+      ["cloak1_color1.png", "cloak1_bg_color1.png"]
+    ],
     "previewOffset": 30
+  },
+  {
+    "name": "Robe",
+    "category": "cloak",
+    "images": [
+      ["robe1.png", "robe1_bg.png"],
+      ["robe_color1.png", "robe1_bg_color1.png"]
+    ],
+    "previewOffset": 30
+  },
+  {
+    "name": "Belt",
+    "category": "pants",
+    "images": [
+      ["belt2.png"]
+    ],
+    "previewOffset": 29
   },
   {
     "name": "Hair Style 1",
     "category": "hair",
-    "images": ["w_hair1.png"],
+    "images": [["hair1.png"]],
     "previewOffset": 5
   },
   {
     "name": "Hair Style 2",
     "category": "hair",
-    "images": ["w_hair2.png"],
+    "images": [["hair2.png"]],
+    "previewOffset": 5
+  },
+  {
+    "name": "Hair Style 3",
+    "category": "hair",
+    "images": [["hair3.png"]],
     "previewOffset": 5
   },
   {
     "name": "Witch Hat",
     "category": "hat",
-    "images": ["w_hat1.png"],
+    "images": [
+      ["hat1.png"],
+      ["hat1_color1.png"]
+    ],
     "previewOffset": -20
   },
   {
-    "name": "Pants",
+    "name": "Shorts",
     "category": "pants",
-    "images": ["w_pants.png"],
+    "images": [["shorts1.png"]],
     "previewOffset": 29
   },
   {
     "name": "Shoes",
     "category": "shoes",
-    "images": ["w_shoes.png"],
+    "images": [["shoes2.png"]],
     "previewOffset": 65
   },
   {
     "name": "Socks",
     "category": "socks",
-    "images": ["w_socks.png"],
+    "images": [
+      ["socks1.png"],
+      ["socks1_color1.png"]
+    ],
     "previewOffset": 55
   },
   {
     "name": "Top",
     "category": "shirt",
-    "images": ["w_top.png"],
+    "images": [
+      ["top1.png"],
+      ["top1_color1.png"]
+    ],
+    "previewOffset": 20
+  },
+  {
+    "name": "Transparent Top",
+    "category": "shirt",
+    "images": [["tanspartop.png"]],
     "previewOffset": 20
   }
 ]

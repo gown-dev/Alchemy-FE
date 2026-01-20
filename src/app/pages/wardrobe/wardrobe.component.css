@@ -82,7 +82,7 @@
 
 .sort-item .sort-sprite app-sprite {
   position: absolute;
-  left: -32px;
+  left: -42px;
   top: -64px;
 }
 
@@ -122,7 +122,7 @@ app-sprite {
 
 #preview-front {
   position: absolute;
-  left: 95px;
+  left: 62px;
   top: 30px;
   scale: 2;
 }
@@ -130,7 +130,7 @@ app-sprite {
 #preview-back {
   position: absolute;
   /*left: 205px;*/
-  left: 338px;
+  left: 318px;
   top: -11px;
   scale: 2;
   transform: scaleX(-1);

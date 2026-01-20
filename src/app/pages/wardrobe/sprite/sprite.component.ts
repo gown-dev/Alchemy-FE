@@ -17,7 +17,7 @@ export class SpriteComponent {
   getStyles() {
     return {
       backgroundImage: `url(${this.spriteUrl || ''})`,
-      backgroundPositionX: `${this.spritePositionX * -64}px`
+      backgroundPositionX: `${this.spritePositionX * -96}px`
     }
   }
 }

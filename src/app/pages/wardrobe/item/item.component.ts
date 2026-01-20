@@ -14,4 +14,5 @@ import { NgForOf } from '@angular/common';
 })
 export class ItemComponent {
   @Input() item: WardrobeItem | undefined;
+  @Input() version: number = 0;
 }
