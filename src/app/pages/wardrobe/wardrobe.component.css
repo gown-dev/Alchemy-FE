@@ -30,6 +30,62 @@
   padding: 2px;
 }
 
+.wardrobe-left {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  justify-content: start;
+  align-items: stretch;
+  gap: 2px;
+}
+
+.wardrobe-right {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  justify-content: start;
+  align-items: stretch;
+}
+
+.wardrobe-sort {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.sort-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sort-item.selected {
+  border: 2px solid red;
+}
+
+.sort-item .sort-sprite {
+  position: absolute;
+  scale: 0.5;
+  flex: 1 1 auto;
+  /*top: 50%;*/
+  /*left: 50%;*/
+}
+
+.sort-item .sort-sprite app-sprite {
+  position: absolute;
+  left: -32px;
+  top: -64px;
+}
+
 .preview-room {
   position: relative;
   width: 357px;

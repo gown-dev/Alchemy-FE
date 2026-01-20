@@ -24,6 +24,7 @@ export class WardrobeComponent implements OnInit {
   wardrobeItems: WardrobeItem[] = [];
   selectedItems: WardrobeItem[] = [];
   bodyItem: WardrobeItem | undefined;
+  selectedSortItem: WardrobeItem | undefined;
 
   ngOnInit() {
     this.http.get<WardrobeItem[]>('/assets/wardrobe/items.json').subscribe({
@@ -52,6 +53,31 @@ export class WardrobeComponent implements OnInit {
       } else {
         this.selectedItems.splice(index, 0, item);
       }
+    }
+  }
+
+  toggleSelectedSortItem(item: WardrobeItem) {
+    if (this.selectedSortItem === item) {
+      this.selectedSortItem = undefined; // Deselect if already selected
+    } else {
+      this.selectedSortItem = item; // Select if it's a new item
+    }
+  }
+
+  sortItemDown(item: WardrobeItem | undefined) {
+    if (!item) return;
+    const index = this.selectedItems.indexOf(item);
+    if (index > 0) {
+      this.selectedItems.splice(index, 1);
+      this.selectedItems.splice(index - 1, 0, item);
+    }
+  }
+  sortItemUp(item: WardrobeItem | undefined) {
+    if (!item) return;
+    const index = this.selectedItems.indexOf(item);
+    if (index < this.selectedItems.length - 1) {
+      this.selectedItems.splice(index, 1);
+      this.selectedItems.splice(index + 1, 0, item);
     }
   }
 
