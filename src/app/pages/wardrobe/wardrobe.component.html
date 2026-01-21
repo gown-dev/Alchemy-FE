@@ -5,16 +5,24 @@
         <div class="preview-room">
           <div id="preview-back">
             @for (item of selectedItems.slice().reverse(); track item.name) {
-              @if (item?.images?.at(selectedVersion[item.name] ?? 0)?.at(1)) {
-                <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(1)"
-                            [spritePositionX]="1"
+              @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(1)) {
+                <app-sprite
+                  [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(1)"
+                  [spritePositionX]="1"
+                  [hueRotate]="customizations[item.name]?.hueRotate"
+                  [greyscale]="customizations[item.name]?.greyscale"
+                  [color]="customizations[item.name]?.color"
                 ></app-sprite>
               }
             }
             @for (item of selectedItems; track item.name) {
-              @if (item?.images?.at(selectedVersion[item.name] ?? 0)?.at(0)) {
-                <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(0)"
-                            [spritePositionX]="1"
+              @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(0)) {
+                <app-sprite
+                  [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(0)"
+                  [spritePositionX]="1"
+                  [hueRotate]="customizations[item.name]?.hueRotate"
+                  [greyscale]="customizations[item.name]?.greyscale"
+                  [color]="customizations[item.name]?.color"
                 ></app-sprite>
               }
             }
@@ -22,16 +30,24 @@
           <img class="room" src="/assets/webdesign/misc/wardrobe-sketch.png" alt="Preview room" />
           <div id="preview-front">
             @for (item of selectedItems.slice().reverse(); track item.name) {
-              @if (item?.images?.at(selectedVersion[item.name] ?? 0)?.at(1)) {
-                <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(1)"
-                            [spritePositionX]="0"
+              @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(1)) {
+                <app-sprite
+                  [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(1)"
+                  [spritePositionX]="0"
+                  [hueRotate]="customizations[item.name]?.hueRotate"
+                  [greyscale]="customizations[item.name]?.greyscale"
+                  [color]="customizations[item.name]?.color"
                 ></app-sprite>
               }
             }
             @for (item of selectedItems; track item.name) {
-              @if (item?.images?.at(selectedVersion[item.name] ?? 0)?.at(0)) {
-                <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(0)"
-                            [spritePositionX]="0"
+              @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(0)) {
+                <app-sprite
+                  [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(0)"
+                  [spritePositionX]="0"
+                  [hueRotate]="customizations[item.name]?.hueRotate"
+                  [greyscale]="customizations[item.name]?.greyscale"
+                  [color]="customizations[item.name]?.color"
                 ></app-sprite>
               }
             }
@@ -70,11 +86,25 @@
             }
           </div>
         } @else {
+          <div class="customizations">
+            <label>Hue Rotate</label>
+            <input type="range" min="0" max="360"
+                   [name]="`hue-rotate_`+selectedSortItem.name"
+                   [value]="customizations[selectedSortItem.name]?.hueRotate ?? 0" (change)="onHueChange(selectedSortItem, $event)" />
+            <label>Greyscale</label>
+            <input type="checkbox"
+                   [name]="`greyscale_`+selectedSortItem.name"
+                   [checked]="customizations[selectedSortItem.name]?.greyscale" (change)="onGreyscaleChange(selectedSortItem, $event)" />
+            <label>Color</label>
+            <input type="color"
+                   [name]="`color_`+selectedSortItem.name"
+                   [value]="customizations[selectedSortItem.name]?.color ?? '#888'" (change)="onColorChange(selectedSortItem, $event)" />
+          </div>
           <div class="wardrobe-items">
             @for (image of selectedSortItem?.images; track i; let i = $index) {
               <app-item [item]="selectedSortItem"
                         (click)="chooseSelectedVersion(selectedSortItem, i)"
-                        [class.selected]="selectedVersion[selectedSortItem.name] == i"
+                        [class.selected]="customizations[selectedSortItem.name]?.version == i"
                         [version]="i"
               ></app-item>
             }

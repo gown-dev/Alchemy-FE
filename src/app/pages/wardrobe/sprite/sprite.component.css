@@ -1,5 +1,23 @@
+.sprite-container {
+  isolation: isolate;
+  position: relative;
+  width: 80px;
+  height: 128px;
+}
+
 .sprite {
-  width: 96px;
+  width: 80px;
   height: 128px;
   image-rendering: pixelated;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 128px;
 }

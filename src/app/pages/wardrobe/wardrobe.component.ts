@@ -6,6 +6,12 @@ import { WardrobeItem } from './models/wardrobe-item.interface';
 
 const default_sort_order = ['body', 'socks', 'shoes', 'pants', 'shirt', 'cloak', 'hair', 'hat'];
 
+export interface WardrobeCustomization {
+  version: number | undefined;
+  hueRotate: number | undefined;
+  greyscale: boolean | undefined;
+  color: string | undefined;
+}
 @Component({
   selector: 'app-wardrobe',
   imports: [
@@ -21,7 +27,7 @@ export class WardrobeComponent implements OnInit {
   selectedItems: WardrobeItem[] = [];
   bodyItem: WardrobeItem | undefined;
   selectedSortItem: WardrobeItem | undefined;
-  selectedVersion: Record<string, number> = {};
+  customizations: Record<string, WardrobeCustomization> = {};
 
   ngOnInit() {
     this.http.get<WardrobeItem[]>('/assets/wardrobe/items.json').subscribe({
@@ -55,14 +61,14 @@ export class WardrobeComponent implements OnInit {
 
   chooseSelectedVersion(item: WardrobeItem, version: number | undefined) {
     console.debug('Choose version:', item.name, version);
-    if (this.selectedSortItem) {
-      if(!version) {
-        delete this.selectedVersion[item.name];
-      } else {
-        this.selectedVersion[item.name] = version;
-      }
+    let customization = this.customizations[item.name] || {};
+    if(!version) {
+      customization.version = 0;
+    } else {
+      customization.version = version;
     }
-    console.debug('Selected versions:', this.selectedVersion);
+    this.customizations[item.name] = customization;
+    console.debug('Selected versions:', this.customizations[item.name].version);
   }
 
   toggleSelectedSortItem(item: WardrobeItem) {
@@ -90,4 +96,40 @@ export class WardrobeComponent implements OnInit {
     }
   }
 
+  onHueChange(item: WardrobeItem, event: Event) {
+    const hueRotate = (event.target as HTMLInputElement).value;
+    this.changeHueRotate(item, hueRotate);
+  }
+
+  changeHueRotate(item: WardrobeItem | undefined, value: string) {
+    if (!item) return;
+    let customization = this.customizations[item.name] || {};
+    customization.hueRotate = parseInt(value, 10);
+    this.customizations[item.name] = customization;
+  }
+
+  onGreyscaleChange(item: WardrobeItem, event: Event) {
+    const greyscale = (event.target as HTMLInputElement).checked;
+    this.changeGreyscale(item, greyscale);
+  }
+
+  changeGreyscale(item: WardrobeItem, value:boolean) {
+    if (!item) return;
+    let customization = this.customizations[item.name] || {};
+    customization.greyscale = value;
+    this.customizations[item.name] = customization;
+    console.debug('customizations', this.customizations);
+  }
+
+  onColorChange(item: WardrobeItem, event: Event) {
+    const color = (event.target as HTMLInputElement).value;
+    this.changeColor(item, color);
+  }
+
+  changeColor(item: WardrobeItem, value:string) {
+    if (!item) return;
+    let customization = this.customizations[item.name] || {};
+    customization.color = value;
+    this.customizations[item.name] = customization;
+  }
 }

@@ -41,10 +41,22 @@
 
 .wardrobe-right {
   display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+  justify-content: start;
+  align-items: stretch;
+  gap: 2px;
+}
+
+.customizations {
+  display: flex;
   flex-direction: column;
   flex: 0 1 auto;
   justify-content: start;
-  align-items: stretch;
+  align-items: start;
+  gap: 2px;
+  border: 2px solid black;
+  padding: 5px;
 }
 
 .wardrobe-sort {
@@ -122,18 +134,23 @@ app-sprite {
 
 #preview-front {
   position: absolute;
-  left: 62px;
-  top: 30px;
+  left: 127px;
+  top: 98px;
   scale: 2;
+  width: 80px;
+  height: 128px;
 }
 
 #preview-back {
   position: absolute;
-  /*left: 205px;*/
-  left: 318px;
-  top: -11px;
+  /*left: 318px;*/
+  /*top: -11px;*/
+  left: 230px;
+  top: 61px;
   scale: 2;
   transform: scaleX(-1);
+  width: 80px;
+  height: 128px;
 }
 
 app-item {
