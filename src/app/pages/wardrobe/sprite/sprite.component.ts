@@ -15,6 +15,7 @@ export class SpriteComponent {
   @Input() hueRotate: number | undefined;
   @Input() greyscale: boolean | undefined;
   @Input() color: string | undefined;
+  @Input() colorBlend: string | undefined;
 
   getStyles() {
     let filters = [];
@@ -36,7 +37,7 @@ export class SpriteComponent {
     return {
       mask: `url(${this.spriteUrl || ''})`,
       maskPositionX: `${this.spritePositionX * -80}px`,
-      mixBlendMode: 'multiply',
+      mixBlendMode: this.colorBlend ?? 'multiply',
       backgroundColor: this.color,
       // filter: filters.length ? filters.join(' ') : undefined,
     }

@@ -12,6 +12,7 @@
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
+                  [colorBlend]="customizations[item.name]?.colorBlend"
                 ></app-sprite>
               }
             }
@@ -23,6 +24,7 @@
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
+                  [colorBlend]="customizations[item.name]?.colorBlend"
                 ></app-sprite>
               }
             }
@@ -37,6 +39,7 @@
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
+                  [colorBlend]="customizations[item.name]?.colorBlend"
                 ></app-sprite>
               }
             }
@@ -48,6 +51,7 @@
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
+                  [colorBlend]="customizations[item.name]?.colorBlend"
                 ></app-sprite>
               }
             }
@@ -95,6 +99,18 @@
             <input type="checkbox"
                    [name]="`greyscale_`+selectedSortItem.name"
                    [checked]="customizations[selectedSortItem.name]?.greyscale" (change)="onGreyscaleChange(selectedSortItem, $event)" />
+            <label>Color Blend Method</label>
+            <select [name]="`blend-mode_`+selectedSortItem.name" (change)="onColorBlendChange(selectedSortItem, $event)">
+              <option value="multiply">Multiply</option>
+              <option value="screen">Screen</option>
+              <option value="overlay">Overlay</option>
+              <option value="darken">Darken</option>
+              <option value="lighten">Lighten</option>
+              <option value="color-dodge">Color Dodge</option>
+              <option value="color-burn">Color Burn</option>
+              <option value="hard-light">Hard Light</option>
+              <option value="soft-light">Soft Light</option>
+            </select>
             <label>Color</label>
             <input type="color"
                    [name]="`color_`+selectedSortItem.name"

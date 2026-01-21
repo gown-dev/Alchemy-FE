@@ -11,6 +11,7 @@ export interface WardrobeCustomization {
   hueRotate: number | undefined;
   greyscale: boolean | undefined;
   color: string | undefined;
+  colorBlend: string | undefined;
 }
 @Component({
   selector: 'app-wardrobe',
@@ -130,6 +131,18 @@ export class WardrobeComponent implements OnInit {
     if (!item) return;
     let customization = this.customizations[item.name] || {};
     customization.color = value;
+    this.customizations[item.name] = customization;
+  }
+
+  onColorBlendChange(item: WardrobeItem, event: Event) {
+    const colorBlend = (event.target as HTMLInputElement).value;
+    this.changeColorBlend(item, colorBlend);
+  }
+
+  changeColorBlend(item: WardrobeItem, value:string) {
+    if (!item) return;
+    let customization = this.customizations[item.name] || {};
+    customization.colorBlend = value;
     this.customizations[item.name] = customization;
   }
 }

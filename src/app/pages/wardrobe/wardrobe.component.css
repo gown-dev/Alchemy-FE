@@ -143,12 +143,9 @@ app-sprite {
 
 #preview-back {
   position: absolute;
-  /*left: 318px;*/
-  /*top: -11px;*/
   left: 230px;
   top: 61px;
-  scale: 2;
-  transform: scaleX(-1);
+  scale: -2 2;
   width: 80px;
   height: 128px;
 }
