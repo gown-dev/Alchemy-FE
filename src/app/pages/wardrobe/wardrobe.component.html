@@ -65,7 +65,7 @@
           <app-item *ngFor="let image of selectedSortItem?.images; index as i"
                     [item]="selectedSortItem"
                     (click)="chooseSelectedVersion(selectedSortItem, i)"
-                    [ngClass]="{'selected': selectedItems.includes(selectedSortItem)}"
+                    [ngClass]="{'selected': selectedVersion[selectedSortItem.name] == i}"
                     [version]="i"
           ></app-item>
         </div>
