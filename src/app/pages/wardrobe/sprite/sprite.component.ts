@@ -42,7 +42,7 @@ export class SpriteComponent {
 
     return {
       mask: `url(${this.spriteUrl || ''})`,
-      maskPositionX: `${this.spritePositionX * -80}px`,
+      maskPosition: `${this.spritePositionX * -80}px 0`,
       mixBlendMode: this.colorBlend ?? 'multiply',
       backgroundColor: this.color,
       // filter: filters.length ? filters.join(' ') : undefined,
