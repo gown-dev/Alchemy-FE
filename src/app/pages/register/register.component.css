@@ -1,38 +1,41 @@
+/* Page */
 .page {
-  min-height: 100vh;
   background: url("/assets/webdesign/bg/dotsbg.png") center / auto repeat,
     #11320c;
 }
 
 /* Content */
 .content {
-  min-height: calc(100vh - 220px);
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 3rem;
-  padding-bottom: 64px;
+  padding-top: 2rem;
 }
 
 /* Parchment */
 .feather-container {
   position: relative;
-  width: 470px;
+  width: 90%;
+  max-width: 500px;
   margin: 0 auto;
 }
 
 .feather-img {
   width: 100%;
   display: block;
+  max-height: 55vh;
+  height: auto;
+  padding-bottom: 1rem;
 }
 
 /* Parchment content */
 .feather-content {
   position: absolute;
-  top: 110px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 260px;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 350px;
   z-index: 2;
 
   display: flex;
@@ -44,18 +47,17 @@
 
 .feather-title {
   margin: 0 0 6px;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Alagard";
   font-weight: normal;
-  font-style: italic;
-  font-size: 22px;
+  font-size: 26px;
   color: #3b2b1e;
   margin-left: 3rem;
 }
 
 /* Form */
 .field {
-  width: 100%;
-  max-width: 220px;
+  width: 50%;
+  max-width: 260px;
   margin: 0 auto;
   text-align: left;
   padding-left: 3rem;
@@ -83,28 +85,29 @@
 /* Register button */
 .register-btn {
   position: relative;
-  margin-top: 2rem;
+  margin-top: 1rem;
   border: none;
   background: none;
-  margin-left: 1rem;
   width: 100px;
 }
 
 .register-btn img {
   width: 100%;
   display: block;
+  transform: translateX(-2rem);
 }
 
 .register-btn span {
   position: absolute;
   inset: 0;
+  margin-right: 4rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   margin-top: 8px;
-  font-family: serif;
+  font-family: "Alagard";
   font-size: 18px;
   color: #000000;
   pointer-events: none;
