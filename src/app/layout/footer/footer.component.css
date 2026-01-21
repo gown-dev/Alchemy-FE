@@ -1,4 +1,6 @@
 .footer {
+  bottom: 0px;
+  width: 100vw;
   display: flex;
   justify-content: center;
   gap: 24px;
