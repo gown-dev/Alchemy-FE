@@ -2,7 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ItemComponent } from './item/item.component';
 import { SpriteComponent } from './sprite/sprite.component';
-import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { WardrobeItem } from './models/wardrobe-item.interface';
 
 const default_sort_order = ['body', 'socks', 'shoes', 'pants', 'shirt', 'cloak', 'hair', 'hat'];
@@ -12,9 +11,6 @@ const default_sort_order = ['body', 'socks', 'shoes', 'pants', 'shirt', 'cloak',
   imports: [
     ItemComponent,
     SpriteComponent,
-    NgForOf,
-    NgClass,
-    NgIf
   ],
   templateUrl: './wardrobe.component.html',
   styleUrl: './wardrobe.component.css'

@@ -1,12 +1,12 @@
 <div class="wardrobe-item">
   <div class="preview">
-    <ng-container *ngFor="let image of item?.images?.at(version)?.slice()?.reverse()">
+    @for (image of item?.images?.at(version)?.slice()?.reverse(); track image) {
       <app-sprite
         [spriteUrl]="image ? '/assets/wardrobe/' + image : ''"
         [spritePositionX]="0"
         [style.top]="0-(item?.previewOffset ?? 0) + 'px'"
       ></app-sprite>
-    </ng-container>
+    }
   </div>
   <div class="buttons">
     <div class="buttons-left">

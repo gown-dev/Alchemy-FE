@@ -4,71 +4,82 @@
       <div class="wardrobe-left">
         <div class="preview-room">
           <div id="preview-back">
-            <ng-container *ngFor="let item of selectedItems.slice().reverse()">
-              <app-sprite *ngIf="item?.images?.at(selectedVersion[item.name] ?? 0)?.at(1)"
-                          [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(1)"
-                          [spritePositionX]="1"
-              ></app-sprite>
-            </ng-container>
-            <ng-container *ngFor="let item of selectedItems">
-              <app-sprite *ngIf="item?.images?.at(selectedVersion[item.name] ?? 0)?.at(0)"
-                          [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(0)"
-                          [spritePositionX]="1"
-              ></app-sprite>
-            </ng-container>
+            @for (item of selectedItems.slice().reverse(); track item.name) {
+              @if (item?.images?.at(selectedVersion[item.name] ?? 0)?.at(1)) {
+                <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(1)"
+                            [spritePositionX]="1"
+                ></app-sprite>
+              }
+            }
+            @for (item of selectedItems; track item.name) {
+              @if (item?.images?.at(selectedVersion[item.name] ?? 0)?.at(0)) {
+                <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(0)"
+                            [spritePositionX]="1"
+                ></app-sprite>
+              }
+            }
           </div>
           <img class="room" src="/assets/webdesign/misc/wardrobe-sketch.png" alt="Preview room" />
           <div id="preview-front">
-            <ng-container *ngFor="let item of selectedItems.slice().reverse()">
-              <app-sprite *ngIf="item?.images?.at(selectedVersion[item.name] ?? 0)?.at(1)"
-                          [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(1)"
-                          [spritePositionX]="0"
-              ></app-sprite>
-            </ng-container>
-            <ng-container *ngFor="let item of selectedItems">
-              <app-sprite *ngIf="item?.images?.at(selectedVersion[item.name] ?? 0)?.at(0)"
-                          [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(0)"
-                          [spritePositionX]="0"
-              ></app-sprite>
-            </ng-container>
+            @for (item of selectedItems.slice().reverse(); track item.name) {
+              @if (item?.images?.at(selectedVersion[item.name] ?? 0)?.at(1)) {
+                <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(1)"
+                            [spritePositionX]="0"
+                ></app-sprite>
+              }
+            }
+            @for (item of selectedItems; track item.name) {
+              @if (item?.images?.at(selectedVersion[item.name] ?? 0)?.at(0)) {
+                <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(selectedVersion[item.name] ?? 0)?.at(0)"
+                            [spritePositionX]="0"
+                ></app-sprite>
+              }
+            }
           </div>
         </div>
         <div class="wardrobe-sort">
           <div class="sort-item" (click)="sortItemUp(selectedSortItem)">&lt;</div>
-            <ng-container *ngFor="let item of selectedItems.slice().reverse()">
-              <div class="sort-item" (click)="toggleSelectedSortItem(item)" [ngClass]="{'selected': selectedSortItem === item}">
-                <div class="sort-sprite"
-                     [style.top]="(item?.previewOffset ?? 0) / -2 + 20 + 'px'">
-                  <app-sprite *ngIf="item?.images?.at(0)?.at(1)"
-                              [spriteUrl]="'/assets/wardrobe/' + item.images.at(0)?.at(1)"
+          @for (item of selectedItems.slice().reverse(); track item.name) {
+            <div class="sort-item" (click)="toggleSelectedSortItem(item)" [class.selected]="selectedSortItem === item">
+              <div class="sort-sprite"
+                   [style.top]="(item?.previewOffset ?? 0) / -2 + 20 + 'px'">
+                @if (item?.images?.at(0)?.at(1)) {
+                  <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(0)?.at(1)"
                               [spritePositionX]="0"
                   ></app-sprite>
-                  <app-sprite *ngIf="item?.images?.at(0)?.at(0)"
-                              [spriteUrl]="'/assets/wardrobe/' + item.images.at(0)?.at(0)"
+                }
+                @if (item?.images?.at(0)?.at(0)) {
+                  <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(0)?.at(0)"
                               [spritePositionX]="0"
                   ></app-sprite>
-                </div>
+                }
               </div>
-            </ng-container>
+            </div>
+          }
           <div class="sort-item" (click)="sortItemDown(selectedSortItem)">&gt;</div>
         </div>
       </div>
       <div class="wardrobe-right">
-        <div class="wardrobe-items" *ngIf="!selectedSortItem">
-          <app-item *ngFor="let item of wardrobeItems"
-                    [item]="item"
-                    (click)="toggleSelectedItem(item)"
-                    [ngClass]="{'selected': selectedItems.includes(item)}"
-          ></app-item>
-        </div>
-        <div class="wardrobe-items" *ngIf="selectedSortItem">
-          <app-item *ngFor="let image of selectedSortItem?.images; index as i"
-                    [item]="selectedSortItem"
-                    (click)="chooseSelectedVersion(selectedSortItem, i)"
-                    [ngClass]="{'selected': selectedVersion[selectedSortItem.name] == i}"
-                    [version]="i"
-          ></app-item>
-        </div>
+        @if (!selectedSortItem) {
+          <div class="wardrobe-items">
+            @for (item of wardrobeItems; track item.name) {
+              <app-item [item]="item"
+                        (click)="toggleSelectedItem(item)"
+                        [class.selected]="selectedItems.includes(item)"
+              ></app-item>
+            }
+          </div>
+        } @else {
+          <div class="wardrobe-items">
+            @for (image of selectedSortItem?.images; track i; let i = $index) {
+              <app-item [item]="selectedSortItem"
+                        (click)="chooseSelectedVersion(selectedSortItem, i)"
+                        [class.selected]="selectedVersion[selectedSortItem.name] == i"
+                        [version]="i"
+              ></app-item>
+            }
+          </div>
+        }
       </div>
     </div>
   </div>
