@@ -13,6 +13,9 @@ export class SpriteComponent {
   @Input() spriteUrl: string | undefined;
   @Input() spritePositionX: number = 0;
   @Input() hueRotate: number | undefined;
+  @Input() brightness: number | undefined;
+  @Input() contrast: number | undefined;
+  @Input() saturation: number | undefined;
   @Input() greyscale: boolean | undefined;
   @Input() color: string | undefined;
   @Input() colorBlend: string | undefined;
@@ -21,6 +24,9 @@ export class SpriteComponent {
     let filters = [];
     if (this.greyscale) filters.push('grayscale(100%)');
     if (this.hueRotate) filters.push(`hue-rotate(${this.hueRotate}deg)`);
+    if (this.brightness) filters.push(`brightness(${this.brightness}%)`);
+    if (this.contrast) filters.push(`contrast(${this.contrast}%)`);
+    if (this.saturation) filters.push(`saturate(${this.saturation}%)`);
 
     return {
       backgroundImage: `url(${this.spriteUrl || ''})`,

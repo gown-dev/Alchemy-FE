@@ -12,6 +12,9 @@
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
+                  [brightness]="customizations[item.name]?.brightness"
+                  [contrast]="customizations[item.name]?.contrast"
+                  [saturation]="customizations[item.name]?.saturation"
                   [colorBlend]="customizations[item.name]?.colorBlend"
                 ></app-sprite>
               }
@@ -24,6 +27,9 @@
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
+                  [brightness]="customizations[item.name]?.brightness"
+                  [contrast]="customizations[item.name]?.contrast"
+                  [saturation]="customizations[item.name]?.saturation"
                   [colorBlend]="customizations[item.name]?.colorBlend"
                 ></app-sprite>
               }
@@ -39,6 +45,9 @@
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
+                  [brightness]="customizations[item.name]?.brightness"
+                  [contrast]="customizations[item.name]?.contrast"
+                  [saturation]="customizations[item.name]?.saturation"
                   [colorBlend]="customizations[item.name]?.colorBlend"
                 ></app-sprite>
               }
@@ -51,6 +60,9 @@
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
+                  [brightness]="customizations[item.name]?.brightness"
+                  [contrast]="customizations[item.name]?.contrast"
+                  [saturation]="customizations[item.name]?.saturation"
                   [colorBlend]="customizations[item.name]?.colorBlend"
                 ></app-sprite>
               }
@@ -94,11 +106,29 @@
             <label>Hue Rotate</label>
             <input type="range" min="0" max="360"
                    [name]="`hue-rotate_`+selectedSortItem.name"
-                   [value]="customizations[selectedSortItem.name]?.hueRotate ?? 0" (change)="onHueChange(selectedSortItem, $event)" />
+                   [value]="customizations[selectedSortItem.name]?.hueRotate ?? 0"
+                   (change)="onHueChange(selectedSortItem, $event)" />
             <label>Greyscale</label>
             <input type="checkbox"
                    [name]="`greyscale_`+selectedSortItem.name"
-                   [checked]="customizations[selectedSortItem.name]?.greyscale" (change)="onGreyscaleChange(selectedSortItem, $event)" />
+                   [checked]="customizations[selectedSortItem.name]?.greyscale"
+                   (change)="onGreyscaleChange(selectedSortItem, $event)" />
+            <label>Brightness</label>
+            <input type="range" min="0" max="200"
+                   [name]="`brightness_`+selectedSortItem.name"
+                   [value]="customizations[selectedSortItem.name]?.brightness ?? 100"
+                   (change)="onBrightnessChange(selectedSortItem, $event)"/>
+            <label>Contrast</label>
+            <input type="range" min="0" max="200"
+                   [name]="`contrast_`+selectedSortItem.name"
+                   [value]="customizations[selectedSortItem.name]?.contrast ?? 100"
+                   (change)="onContrastChange(selectedSortItem, $event)"/>
+            <label>Saturation</label>
+            <input type="range" min="0" max="200"
+                   [name]="`saturation_`+selectedSortItem.name"
+                   [value]="customizations[selectedSortItem.name]?.saturation ?? 100"
+                   (change)="onSaturationChange(selectedSortItem, $event)"/>
+
             <label>Color Blend Method</label>
             <select [name]="`blend-mode_`+selectedSortItem.name" (change)="onColorBlendChange(selectedSortItem, $event)">
               <option value="multiply">Multiply</option>
@@ -115,6 +145,7 @@
             <input type="color"
                    [name]="`color_`+selectedSortItem.name"
                    [value]="customizations[selectedSortItem.name]?.color ?? '#888'" (change)="onColorChange(selectedSortItem, $event)" />
+            <button (click)="resetCustomizations(selectedSortItem)">Reset</button>
           </div>
           <div class="wardrobe-items">
             @for (image of selectedSortItem?.images; track i; let i = $index) {

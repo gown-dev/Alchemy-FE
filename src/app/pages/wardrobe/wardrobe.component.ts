@@ -12,6 +12,9 @@ export interface WardrobeCustomization {
   greyscale: boolean | undefined;
   color: string | undefined;
   colorBlend: string | undefined;
+  brightness: number | undefined;
+  contrast: number | undefined;
+  saturation: number | undefined;
 }
 @Component({
   selector: 'app-wardrobe',
@@ -145,4 +148,46 @@ export class WardrobeComponent implements OnInit {
     customization.colorBlend = value;
     this.customizations[item.name] = customization;
   }
+
+  onBrightnessChange(item: WardrobeItem, event: Event) {
+    const brightness = (event.target as HTMLInputElement).value;
+    this.changeBrightness(item, brightness);
+  }
+
+  changeBrightness(item: WardrobeItem, value: string) {
+    if (!item) return;
+    let customization = this.customizations[item.name] || {};
+    customization.brightness = parseInt(value, 10);
+    this.customizations[item.name] = customization;
+  }
+
+  onContrastChange(item: WardrobeItem, event: Event) {
+    const contrast = (event.target as HTMLInputElement).value;
+    this.changeContrast(item, contrast);
+  }
+
+  changeContrast(item: WardrobeItem, value: string) {
+    if (!item) return;
+    let customization = this.customizations[item.name] || {};
+    customization.contrast = parseInt(value, 10);
+    this.customizations[item.name] = customization;
+  }
+
+  onSaturationChange(item: WardrobeItem, event: Event) {
+    const saturation = (event.target as HTMLInputElement).value;
+    this.changeSaturation(item, saturation);
+  }
+
+  changeSaturation(item: WardrobeItem, value: string) {
+    if (!item) return;
+    let customization = this.customizations[item.name] || {};
+    customization.saturation = parseInt(value, 10);
+    this.customizations[item.name] = customization;
+  }
+
+  resetCustomizations(item: WardrobeItem) {
+    if(!item) return;
+    delete this.customizations[item.name];
+  }
+
 }
