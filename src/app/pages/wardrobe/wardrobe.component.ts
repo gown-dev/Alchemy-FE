@@ -25,6 +25,7 @@ export class WardrobeComponent implements OnInit {
   selectedItems: WardrobeItem[] = [];
   bodyItem: WardrobeItem | undefined;
   selectedSortItem: WardrobeItem | undefined;
+  selectedVersion: Record<string, number> = {};
 
   ngOnInit() {
     this.http.get<WardrobeItem[]>('/assets/wardrobe/items.json').subscribe({
@@ -54,6 +55,18 @@ export class WardrobeComponent implements OnInit {
         this.selectedItems.splice(index, 0, item);
       }
     }
+  }
+
+  chooseSelectedVersion(item: WardrobeItem, version: number | undefined) {
+    console.debug('Choose version:', item.name, version);
+    if (this.selectedSortItem) {
+      if(!version) {
+        delete this.selectedVersion[item.name];
+      } else {
+        this.selectedVersion[item.name] = version;
+      }
+    }
+    console.debug('Selected versions:', this.selectedVersion);
   }
 
   toggleSelectedSortItem(item: WardrobeItem) {
