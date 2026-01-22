@@ -8,7 +8,7 @@
               @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(1)) {
                 <app-sprite
                   [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(1)"
-                  [spritePositionX]="1"
+                  [spritePositionX]="(animationDisplayFrame * 2) + 1"
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
@@ -23,7 +23,7 @@
               @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(0)) {
                 <app-sprite
                   [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(0)"
-                  [spritePositionX]="1"
+                  [spritePositionX]="(animationDisplayFrame * 2) + 1"
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
@@ -41,7 +41,7 @@
               @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(1)) {
                 <app-sprite
                   [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(1)"
-                  [spritePositionX]="0"
+                  [spritePositionX]="(animationDisplayFrame * 2)"
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
@@ -56,7 +56,7 @@
               @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(0)) {
                 <app-sprite
                   [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(0)"
-                  [spritePositionX]="0"
+                  [spritePositionX]="(animationDisplayFrame * 2)"
                   [hueRotate]="customizations[item.name]?.hueRotate"
                   [greyscale]="customizations[item.name]?.greyscale"
                   [color]="customizations[item.name]?.color"
@@ -68,6 +68,7 @@
               }
             }
           </div>
+          <button (click)="toggleAnimation()" class="animation-toggle">@if (animating) { Animating } @else { Idle }</button>
         </div>
         <div class="wardrobe-sort">
           <div class="sort-item" (click)="sortItemUp(selectedSortItem)">&lt;</div>

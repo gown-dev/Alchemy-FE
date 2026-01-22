@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ItemComponent } from './item/item.component';
 import { SpriteComponent } from './sprite/sprite.component';
 import { WardrobeItem } from './models/wardrobe-item.interface';
+import { interval, animationFrameScheduler } from 'rxjs';
 
 const default_sort_order = ['body', 'socks', 'shoes', 'pants', 'shirt', 'cloak', 'hair', 'hat'];
 
@@ -32,6 +33,10 @@ export class WardrobeComponent implements OnInit {
   bodyItem: WardrobeItem | undefined;
   selectedSortItem: WardrobeItem | undefined;
   customizations: Record<string, WardrobeCustomization> = {};
+  animating: boolean = false;
+  animationStartFrame: number = 0;
+  animationEndFrame: number = 5;
+  animationDisplayFrame: number = 0;
 
   ngOnInit() {
     this.http.get<WardrobeItem[]>('/assets/wardrobe/items.json').subscribe({
@@ -40,9 +45,23 @@ export class WardrobeComponent implements OnInit {
         this.wardrobeItems = data.filter(item => item.category !== 'body');
         console.debug('Wardrobe items loaded:', this.wardrobeItems);
         this.selectedItems = [this.bodyItem!];
+
+        this.startIntervalAnimation();
       },
       error: (error) => {
         console.error('Error loading wardrobe items:', error);
+      }
+    });
+  }
+
+  startIntervalAnimation() {
+    interval(150, animationFrameScheduler).subscribe(() => {
+      console.debug('Animation frame');
+      if(this.animating) {
+        this.animationDisplayFrame++;
+        if(this.animationDisplayFrame > this.animationEndFrame) {
+          this.animationDisplayFrame = this.animationStartFrame;
+        }
       }
     });
   }
@@ -188,6 +207,13 @@ export class WardrobeComponent implements OnInit {
   resetCustomizations(item: WardrobeItem) {
     if(!item) return;
     delete this.customizations[item.name];
+  }
+
+  toggleAnimation() {
+    this.animating = !this.animating;
+    if (!this.animating) {
+      this.animationDisplayFrame = 0;
+    }
   }
 
 }
