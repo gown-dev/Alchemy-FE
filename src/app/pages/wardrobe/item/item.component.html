@@ -1,0 +1,21 @@
+<div class="wardrobe-item">
+  <div class="preview">
+    @for (image of item?.images?.at(version)?.slice()?.reverse(); track image) {
+      <app-sprite
+        [spriteUrl]="image ? '/assets/wardrobe/' + image : ''"
+        [spritePositionX]="0"
+        [style.top]="0-(item?.previewOffset ?? 0) + 'px'"
+      ></app-sprite>
+    }
+  </div>
+  <div class="buttons">
+    <div class="buttons-left">
+      <button name="sell">S</button>
+      <button name="trade">T</button>
+      <button name="delete">D</button>
+    </div>
+    <div class="buttons-right">
+      <button name="favorite">F</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<div class="page">
+  <div class="content">
+    <div class="wardrobe-container">
+      <div class="wardrobe-left">
+        <div class="preview-room">
+          <div id="preview-back">
+            @for (item of selectedItems.slice().reverse(); track item.name) {
+              @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(1)) {
+                <app-sprite
+                  [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(1)"
+                  [spritePositionX]="(animationDisplayFrame * 2) + 1"
+                  [hueRotate]="customizations[item.name]?.hueRotate"
+                  [greyscale]="customizations[item.name]?.greyscale"
+                  [color]="customizations[item.name]?.color"
+                  [brightness]="customizations[item.name]?.brightness"
+                  [contrast]="customizations[item.name]?.contrast"
+                  [saturation]="customizations[item.name]?.saturation"
+                  [colorBlend]="customizations[item.name]?.colorBlend"
+                ></app-sprite>
+              }
+            }
+            @for (item of selectedItems; track item.name) {
+              @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(0)) {
+                <app-sprite
+                  [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(0)"
+                  [spritePositionX]="(animationDisplayFrame * 2) + 1"
+                  [hueRotate]="customizations[item.name]?.hueRotate"
+                  [greyscale]="customizations[item.name]?.greyscale"
+                  [color]="customizations[item.name]?.color"
+                  [brightness]="customizations[item.name]?.brightness"
+                  [contrast]="customizations[item.name]?.contrast"
+                  [saturation]="customizations[item.name]?.saturation"
+                  [colorBlend]="customizations[item.name]?.colorBlend"
+                ></app-sprite>
+              }
+            }
+          </div>
+          <img class="room" src="/assets/webdesign/misc/wardrobe-sketch.png" alt="Preview room" />
+          <div id="preview-front">
+            @for (item of selectedItems.slice().reverse(); track item.name) {
+              @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(1)) {
+                <app-sprite
+                  [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(1)"
+                  [spritePositionX]="(animationDisplayFrame * 2)"
+                  [hueRotate]="customizations[item.name]?.hueRotate"
+                  [greyscale]="customizations[item.name]?.greyscale"
+                  [color]="customizations[item.name]?.color"
+                  [brightness]="customizations[item.name]?.brightness"
+                  [contrast]="customizations[item.name]?.contrast"
+                  [saturation]="customizations[item.name]?.saturation"
+                  [colorBlend]="customizations[item.name]?.colorBlend"
+                ></app-sprite>
+              }
+            }
+            @for (item of selectedItems; track item.name) {
+              @if (item?.images?.at(customizations[item.name]?.version ?? 0)?.at(0)) {
+                <app-sprite
+                  [spriteUrl]="'/assets/wardrobe/' + item.images.at(customizations[item.name]?.version ?? 0)?.at(0)"
+                  [spritePositionX]="(animationDisplayFrame * 2)"
+                  [hueRotate]="customizations[item.name]?.hueRotate"
+                  [greyscale]="customizations[item.name]?.greyscale"
+                  [color]="customizations[item.name]?.color"
+                  [brightness]="customizations[item.name]?.brightness"
+                  [contrast]="customizations[item.name]?.contrast"
+                  [saturation]="customizations[item.name]?.saturation"
+                  [colorBlend]="customizations[item.name]?.colorBlend"
+                ></app-sprite>
+              }
+            }
+          </div>
+          <button (click)="toggleAnimation()" class="animation-toggle">@if (animating) { Animating } @else { Idle }</button>
+        </div>
+        <div class="wardrobe-sort">
+          <div class="sort-item" (click)="sortItemUp(selectedSortItem)">&lt;</div>
+          @for (item of selectedItems.slice().reverse(); track item.name) {
+            <div class="sort-item" (click)="toggleSelectedSortItem(item)" [class.selected]="selectedSortItem === item">
+              <div class="sort-sprite"
+                   [style.top]="(item?.previewOffset ?? 0) / -2 + 20 + 'px'">
+                @if (item?.images?.at(0)?.at(1)) {
+                  <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(0)?.at(1)"
+                              [spritePositionX]="0"
+                  ></app-sprite>
+                }
+                @if (item?.images?.at(0)?.at(0)) {
+                  <app-sprite [spriteUrl]="'/assets/wardrobe/' + item.images.at(0)?.at(0)"
+                              [spritePositionX]="0"
+                  ></app-sprite>
+                }
+              </div>
+            </div>
+          }
+          <div class="sort-item" (click)="sortItemDown(selectedSortItem)">&gt;</div>
+        </div>
+      </div>
+      <div class="wardrobe-right">
+        @if (!selectedSortItem) {
+          <div class="wardrobe-items">
+            @for (item of wardrobeItems; track item.name) {
+              <app-item [item]="item"
+                        (click)="toggleSelectedItem(item)"
+                        [class.selected]="selectedItems.includes(item)"
+              ></app-item>
+            }
+          </div>
+        } @else {
+          <div class="customizations">
+            <label>Hue Rotate</label>
+            <input type="range" min="0" max="360"
+                   [name]="`hue-rotate_`+selectedSortItem.name"
+                   [value]="customizations[selectedSortItem.name]?.hueRotate ?? 0"
+                   (change)="onHueChange(selectedSortItem, $event)" />
+            <label>Greyscale</label>
+            <input type="checkbox"
+                   [name]="`greyscale_`+selectedSortItem.name"
+                   [checked]="customizations[selectedSortItem.name]?.greyscale"
+                   (change)="onGreyscaleChange(selectedSortItem, $event)" />
+            <label>Brightness</label>
+            <input type="range" min="0" max="200"
+                   [name]="`brightness_`+selectedSortItem.name"
+                   [value]="customizations[selectedSortItem.name]?.brightness ?? 100"
+                   (change)="onBrightnessChange(selectedSortItem, $event)"/>
+            <label>Contrast</label>
+            <input type="range" min="0" max="200"
+                   [name]="`contrast_`+selectedSortItem.name"
+                   [value]="customizations[selectedSortItem.name]?.contrast ?? 100"
+                   (change)="onContrastChange(selectedSortItem, $event)"/>
+            <label>Saturation</label>
+            <input type="range" min="0" max="200"
+                   [name]="`saturation_`+selectedSortItem.name"
+                   [value]="customizations[selectedSortItem.name]?.saturation ?? 100"
+                   (change)="onSaturationChange(selectedSortItem, $event)"/>
+
+            <label>Color Blend Method</label>
+            <select [name]="`blend-mode_`+selectedSortItem.name" (change)="onColorBlendChange(selectedSortItem, $event)">
+              <option value="multiply">Multiply</option>
+              <option value="screen">Screen</option>
+              <option value="overlay">Overlay</option>
+              <option value="darken">Darken</option>
+              <option value="lighten">Lighten</option>
+              <option value="color-dodge">Color Dodge</option>
+              <option value="color-burn">Color Burn</option>
+              <option value="hard-light">Hard Light</option>
+              <option value="soft-light">Soft Light</option>
+            </select>
+            <label>Color</label>
+            <input type="color"
+                   [name]="`color_`+selectedSortItem.name"
+                   [value]="customizations[selectedSortItem.name]?.color ?? '#888'" (change)="onColorChange(selectedSortItem, $event)" />
+            <button (click)="resetCustomizations(selectedSortItem)">Reset</button>
+          </div>
+          <div class="wardrobe-items">
+            @for (image of selectedSortItem?.images; track i; let i = $index) {
+              <app-item [item]="selectedSortItem"
+                        (click)="chooseSelectedVersion(selectedSortItem, i)"
+                        [class.selected]="(customizations[selectedSortItem.name]?.version ?? 0) == i"
+                        [version]="i"
+              ></app-item>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+<p>wardrobe works!</p>
