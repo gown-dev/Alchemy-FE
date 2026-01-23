@@ -85,13 +85,14 @@
   margin-top: 2rem;
   padding: 4px;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 2px solid #c9a98a;
   background: #c9a98a;
   color: #000000;
   font-weight: 600;
   cursor: pointer;
   font-size: 0.9rem;
+  border: 1px solid #1d1c1c;
 }
 
 /* Responsive layout */
