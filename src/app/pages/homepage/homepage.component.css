@@ -1,0 +1,208 @@
+/* Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 280px;
+  grid-template-rows: auto auto auto;
+  gap: 20px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Extra spacing for right column */
+.dashboard-grid > .profile,
+.dashboard-grid > .inventory {
+  margin-left: 20px;
+}
+
+/* Grid placement */
+.announcements {
+  grid-column: 1;
+  grid-row: 1;
+}
+.hot-topics {
+  grid-column: 2;
+  grid-row: 1;
+}
+.profile {
+  grid-column: 3;
+  grid-row: 1 / 3;
+}
+.shop-updates {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+}
+.friends-activity {
+  grid-column: 1;
+  grid-row: 3;
+}
+.alchemy {
+  grid-column: 2;
+  grid-row: 3;
+}
+.inventory {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+/* Card */
+.card {
+  border-radius: 14px;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title bar */
+.card-title {
+  background: #c9a98a;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Content area */
+.card-body {
+  background: #f7efe2;
+  min-height: 140px;
+  flex-grow: 1;
+}
+
+.card-body > * {
+  padding: 14px 16px;
+}
+
+.card-body > *:nth-child(odd) {
+  background: #f7efe2;
+}
+
+.card-body > *:nth-child(even) {
+  background: #efe3d3;
+}
+
+/* Profile Card */
+.profile {
+  background: #c9a98a;
+  border-radius: 20px;
+  color: #080808;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  min-height: 300px;
+  box-sizing: border-box;
+}
+
+.profile .card-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  background: none;
+  padding: 0;
+  color: #080808;
+  text-align: center;
+}
+
+.profile .card-body {
+  background: none;
+  padding: 0;
+  flex-grow: 1;
+}
+
+/* Alchemy */
+.alchemy {
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Title bar */
+.alchemy .card-title {
+  background: #c9a98a;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Card body*/
+.alchemy .card-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  flex-grow: 1;
+  background: #f7efe2;
+}
+
+.alchemy .image-container {
+  width: 120px;
+  height: 120px;
+  background: url("/assets/webdesign/homepage/littlepentagram3.png")
+    center/cover no-repeat;
+}
+
+/* Text & button wrapper */
+.alchemy .text-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  background-color: transparent;
+}
+
+/* Text */
+.alchemy .text-button-wrapper p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #080808;
+  max-width: 1rem;
+  font-family: "Courier New", Courier, monospace;
+  margin-left: 1.5rem;
+}
+
+/* Button */
+.alchemy .text-button-wrapper button {
+  padding: 6px 16px;
+  border-radius: 40px;
+  border: none;
+  background: #ece0c9;
+  border: 1px solid #9e9b98;
+  color: #201d1d;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: 1.5rem;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    padding: 20px;
+  }
+
+  .profile,
+  .shop-updates,
+  .inventory,
+  .alchemy,
+  .friends-activity,
+  .hot-topics,
+  .announcements {
+    grid-column: 1;
+    grid-row: auto;
+    margin-left: 0;
+  }
+
+  .alchemy .card-body {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .alchemy .text-button-wrapper {
+    justify-content: center;
+  }
+}

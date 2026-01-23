@@ -5,8 +5,21 @@ import { AdminGuard } from './guards/admin.guard';
 import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'register', pathMatch: 'full' },
+  // redirect empty path to /home
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+  // Lazy-load standalone HomeComponent
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./pages/homepage/homepage.component').then(
+        (m) => m.HomeComponent
+      ),
+  },
+
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
+  { path: '**', redirectTo: 'home' },
 ];
