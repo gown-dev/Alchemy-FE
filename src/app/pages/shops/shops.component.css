@@ -1,0 +1,96 @@
+/* Shops page grid */
+.shops-page-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px; /* main image + sidebar */
+  gap: 20px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Main shop image */
+.shop-main-image img {
+  width: 100%;
+  border-radius: 14px;
+  display: block;
+  max-height: 600px;
+  object-fit: cover;
+}
+
+/* Avatar card (right sidebar) */
+.shop-avatar-card {
+  background: #c9a98a;
+  border-radius: 20px;
+  color: #080808;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  min-height: 300px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+
+/* Username at top */
+.shop-avatar-card .card-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  background: none;
+  padding: 0;
+  color: #080808;
+  text-align: center;
+}
+
+/* Card body */
+.shop-avatar-card .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  flex-grow: 1;
+  background: none;
+  padding: 0;
+}
+
+/* Avatar image */
+.shop-avatar-card .avatar-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: url("/assets/webdesign/avatar/default-avatar.png") center/cover
+    no-repeat;
+}
+
+/* Wardrobe button below card body */
+.shop-avatar-card .wardrobe-button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 2px solid #c9a98a;
+  background: #c9a98a;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.shop-avatar-card .wardrobe-button:hover {
+  background: #fff;
+  color: #c9a98a;
+  border-color: #c9a98a;
+}
+
+/* Responsive layout */
+@media (max-width: 1024px) {
+  .shops-page-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .shop-avatar-card {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
