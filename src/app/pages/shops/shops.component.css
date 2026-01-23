@@ -1,7 +1,7 @@
 /* Shops page grid */
 .shops-page-grid {
   display: grid;
-  grid-template-columns: 1fr 280px; /* main image + sidebar */
+  grid-template-columns: 1fr 280px;
   gap: 20px;
   padding: 40px;
   max-width: 1200px;
@@ -10,36 +10,46 @@
 }
 
 /* Main shop image */
+.shop-main-image {
+  position: relative;
+}
+
 .shop-main-image img {
   width: 100%;
   border-radius: 14px;
   display: block;
-  max-height: 600px;
+  max-height: 500px;
   object-fit: cover;
 }
 
-/* Avatar card (right sidebar) */
+/* Title bar */
+.shop-title-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  background: #bf9f82;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  color: #080808;
+  z-index: 2;
+  border-radius: 14px 14px 0 0;
+}
+
+/* Avatar box */
 .shop-avatar-card {
   background: #c9a98a;
   border-radius: 20px;
   color: #080808;
+  padding: 16px;
+  height: 350px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  min-height: 300px;
-  box-sizing: border-box;
+  align-items: center;
   justify-content: flex-start;
-}
-
-/* Username at top */
-.shop-avatar-card .card-title {
-  font-weight: 700;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  background: none;
-  padding: 0;
-  color: #080808;
-  text-align: center;
+  box-sizing: border-box;
 }
 
 /* Card body */
@@ -47,50 +57,109 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  flex-grow: 1;
-  background: none;
+  gap: 10px;
+  flex-grow: 0;
   padding: 0;
+  margin: 0;
 }
 
-/* Avatar image */
+/* Username */
+.shop-avatar-card .card-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* Avatar image
 .shop-avatar-card .avatar-image {
-  width: 120px;
-  height: 120px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background: url("/assets/webdesign/avatar/default-avatar.png") center/cover
     no-repeat;
-}
+} */
 
-/* Wardrobe button below card body */
-.shop-avatar-card .wardrobe-button {
-  margin-top: 20px;
-  padding: 8px 16px;
+/* Wardrobe button */
+.wardrobe-button {
+  margin-top: 2rem;
+  padding: 4px;
+  width: 100%;
   border-radius: 12px;
   border: 2px solid #c9a98a;
   background: #c9a98a;
-  color: #fff;
+  color: #000000;
   font-weight: 600;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: all 0.2s ease;
-}
-
-.shop-avatar-card .wardrobe-button:hover {
-  background: #fff;
-  color: #c9a98a;
-  border-color: #c9a98a;
 }
 
 /* Responsive layout */
 @media (max-width: 1024px) {
   .shops-page-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
   }
 
   .shop-avatar-card {
     width: 100%;
     margin-top: 20px;
+  }
+
+  .wardrobe-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .shop-title-bar {
+    font-size: 1.4rem;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .shop-main-image img {
+    max-height: 350px;
+  }
+
+  .shop-avatar-card {
+    min-height: 100px;
+    padding: 16px;
+  }
+
+  .shop-avatar-card .avatar-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .wardrobe-button {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-main-image img {
+    max-height: 250px;
+  }
+
+  .shop-title-bar {
+    font-size: 1.2rem;
+    padding: 8px 0;
+  }
+
+  .shop-avatar-card {
+    min-height: 80px;
+    padding: 12px;
+  }
+
+  .shop-avatar-card .avatar-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .wardrobe-button {
+    padding: 5px 12px;
+    font-size: 0.8rem;
   }
 }
